@@ -1,43 +1,34 @@
+import "./styles.css";
+
 export const Welcome = () => {
   return (
-    <html lang="en">
-      <head>
-        <meta charset="utf-8" />
-        <link rel="icon" href="%/UPTmini.ico" />
-        <title>CantinaUPT</title>
-        <link rel="stylesheet" href="sticky.css" />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <div class="logo">
-              <img src="logo_UPT.ico" alt="CantinaUPT" />
-            </div>
-            <div class="menu">
-              <ul>
-                <li>
-                  <a href="acasă.html">ACASĂ</a>
-                </li>
-                <li>
-                  <a href="meniu.html">MENIU</a>
-                </li>
-                <li>
-                  <a href="despre.html">
-                    DESPRE NOI (echhipa noastra, galerie)
-                  </a>
-                </li>
-                <li>
-                  <a href="orar.html">ORAR</a>
-                </li>
-                <li>
-                  <a href="contact.html">CONTACT</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </header>
-        <div class="wrapper"></div>
-      </body>
-    </html>
+    <header>
+      <div>
+        <div>
+          <img
+            src="../../../logo_UPT.jpg"
+            alt="CantinaUPT"
+            style={{ width: "20%", height: "20%", paddingRight: "2rem" }}
+          />
+        </div>
+        <div class="menu">
+          <div>
+            <a href="acasă.html">ACASĂ</a>
+          </div>
+          <div>
+            <a href="meniu.html" onClick>
+              MENIU
+            </a>
+          </div>
+          <div>
+            <a href="despre.html">DESPRE NOI (echipa noastra, galerie)</a>
+          </div>
+          <div>
+            <a href="orar.html">ORAR</a>
+          </div>
+          <a href="contact.html">CONTACT</a>
+        </div>
+      </div>
+    </header>
   );
 };
