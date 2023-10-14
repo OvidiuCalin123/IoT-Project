@@ -1,0 +1,12 @@
+.telefon {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  padding-top: 35px;
+}
+
+.adresa {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
