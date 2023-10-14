@@ -1,5 +1,67 @@
 .menu {
   display: flex;
+  font-size: 3vw;
+  color: white;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  padding-top: 15px;
+  margin: 10px;
+  font-size: 25px;
+}
+
+.header-welcome {
+  display: flex;
+  justify-content: space-between;
+  background-color: #050560;
+}
+
+.cantina-link {
+  display: flex;
+  padding-top: 10.4px;
+  justify-content: space-between;
+  background-color: #050560;
+  padding-bottom: 0.85px;
+}
+
+header h2 {
+  display: flex;
+  padding-left: 82.5px;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.header-logo {
+  max-width: 100px;
+  height: auto;
+  padding-left: 30px;
+}
+
+header h2 {
+  font-size: 50px;
+  color: white;
+  justify-content: flex-start;
+  margin-left: -60px;
+}
+.cantina-link {
+  justify-content: flex-start;
+  display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  text-decoration: none;
+}
+
+.boldWelcome {
+  display: flex;
+  align-content: stretch;
+  justify-content: center;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+.pozaCantinaUPT {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
 }
