@@ -1,4 +1,4 @@
-// import React, { useState } from "react";
+import "./contact.css";
 import { Welcome } from "../welcome/Welcome";
 export const Contact = () => {
   return (
