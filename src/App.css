@@ -18,17 +18,27 @@ body {
 header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #0505af;
+  justify-content: space-between;
+  background-color: #050560;
   padding: 10px;
   padding-bottom: 10px;
 }
 
 .header-content {
   display: flex;
-  align-items: left;
-  justify-content: flex-left;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
+}
+
+.header-content-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-content-right {
+  display: flex;
+  align-items: center;
 }
 
 header h1 {
@@ -36,8 +46,24 @@ header h1 {
   color: white;
 }
 
+header h5 {
+  font-size: 1.5rem;
+  color: white;
+  padding-top: 2rem;
+}
+
 .header-logo {
-  max-width: 100px; /* Set the maximum width for the logo (adjust as needed) */
+  max-width: 100px;
   height: auto;
   padding-left: 30px;
+}
+
+.allign-box {
+  display: flex;
+  justify-content: center;
+}
+
+.cantinaUPT {
+  display: flex;
+  text-decoration: none;
 }

@@ -5,7 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { LogInIndex } from "./log in/log_in_index";
+import { LogInIndex } from "./logIn/logInIndex";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Welcome } from "./welcome/Welcome";
 function App() {

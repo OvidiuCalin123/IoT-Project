@@ -1,0 +1,23 @@
+.logInSyles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.box-login {
+  background: white;
+  padding: 45px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  position: relative;
+  height: 65vh;
+  width: 80vh;
+  overflow-y: auto;
+}
+
+.center-log-in-form {
+  display: flex;
+  justify-content: center;
+}
