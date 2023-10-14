@@ -1,0 +1,43 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.schedule-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.days-list {
+  flex: 1;
+  padding-top: 10px;
+  padding-right: 15px;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.hours-list {
+  flex: 1;
+  padding-top: 10px;
+}
+
+li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.day,
+.time {
+  font-weight: bold;
+  font-size: 35px; /* Adjust the font size as needed */
+}
+
+.time {
+  color: #555;
+}
+
+.closed {
+  color: red;
+}

@@ -7,13 +7,17 @@ export const NavBar = () => {
         <title>CantinaUPT</title>
       </head>
       <header id="header">
-        <div class="container">
-          <div class="header-content">
-            <div class="header-content-left">
+        <div className="container">
+          <div className="header-content">
+            <div className="header-content-left">
               <h1>Cantina</h1>
-              <img src={uptHeaderLogo} alt="Cantina Logo" class="header-logo" />
+              <img
+                src={uptHeaderLogo}
+                alt="Cantina Logo"
+                className="header-logo"
+              />
             </div>
-            <div class="header-content-right">
+            <div className="header-content-right">
               <h5>...since 1930</h5>
             </div>
           </div>

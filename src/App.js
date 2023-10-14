@@ -7,14 +7,20 @@ import {
 } from "react-router-dom";
 import { LogInIndex } from "./logIn/logInIndex";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Welcome } from "./welcome/Welcome";
+import { Orar } from "./menuBar/orar";
+import { WelcomeBody } from "./welcome/welcomeBody";
+import { Contact } from "./menuBar/contact";
+import { Meniu } from "./menuBar/meniu";
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route exact path="/login" element={<LogInIndex />} />
-        <Route exact path="/welcome" element={<Welcome />} />
+        <Route exact path="/welcome" element={<WelcomeBody />} />
+        <Route exact path="/orar" element={<Orar />} />
+        <Route exact path="/contact" element={<Contact />} />
+        <Route exact path="/meniu" element={<Meniu />} />
       </Routes>
     </Router>
   );

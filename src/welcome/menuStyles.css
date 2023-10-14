@@ -4,12 +4,28 @@
   color: white;
 }
 
+.tab-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+}
+
+.tab-unselected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  background-color: #2a3892;
+}
+
 .menu a {
   text-decoration: none;
   color: white;
   padding-top: 15px;
   margin: 10px;
   font-size: 25px;
+  padding-right: 1.5rem;
 }
 
 .header-welcome {
