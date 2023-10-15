@@ -4,7 +4,7 @@ import "./menuStyles.css";
 import { WelcomeNavBar } from "../welcome/Welcome";
 import { Contact } from "../menuBar/contact";
 import { Orar } from "../menuBar/orar";
-import { Meniu } from "../menuBar/meniu";
+import { Meniu } from "../menuBar/meniu/meniu";
 import uptCantinaPhoto from "../designFiles/pozaCantinaUPT.jpg";
 
 export const WelcomeBody = () => {

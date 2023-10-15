@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Orar } from "./menuBar/orar";
 import { WelcomeBody } from "./welcome/welcomeBody";
 import { Contact } from "./menuBar/contact";
-import { Meniu } from "./menuBar/meniu";
+import { Meniu } from "./menuBar/meniu/meniu";
 function App() {
   return (
     <Router>
