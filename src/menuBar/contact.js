@@ -1,9 +1,7 @@
 import "./contact.css";
-import { Welcome } from "../welcome/Welcome";
 export const Contact = () => {
   return (
     <div>
-      <Welcome />
       <div className="telefon">
         Telefon: 0256 404 354; Email: simona.stanjic@upt.ro
       </div>

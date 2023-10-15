@@ -1,26 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import "./menuStyles.css";
-import { Welcome } from "../welcome/Welcome";
+import { WelcomeNavBar } from "../welcome/Welcome";
+import { Contact } from "../menuBar/contact";
+import { Orar } from "../menuBar/orar";
+import { Meniu } from "../menuBar/meniu";
 import uptCantinaPhoto from "../designFiles/pozaCantinaUPT.jpg";
 
 export const WelcomeBody = () => {
+  const [showContent, setShowContent] = useState("");
+
   return (
     <div>
-      <Welcome />
-      <body>
-        <div className="boldWelcome">
-          Bine ați venit la CantinaUPT – o parte din istoria Universității
-          Politehnica Timișoara din 1930!
+      <WelcomeNavBar
+        setShowContent={setShowContent}
+        showContent={showContent}
+      />
+      {showContent === "welcome" && (
+        <div>
+          <div className="boldWelcome">
+            Bine ați venit la CantinaUPT – o parte din istoria Universității
+            Politehnica Timișoara din 1930!
+          </div>
+          <div className="poza-cantina-upt">
+            <img
+              src={uptCantinaPhoto}
+              alt="poza Cantina"
+              className="poza-cantina"
+            />
+          </div>
         </div>
-        <div className="pozaCantinaUPT">
-          <img
-            src={uptCantinaPhoto}
-            alt="poza Cantina"
-            className="poza-cantina"
-          />
-        </div>
-      </body>
+      )}
+      {showContent === "orar" && <Orar />}
+      {showContent === "contact" && <Contact />}
+      {showContent === "meniu" && <Meniu />}
     </div>
   );
 };

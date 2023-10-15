@@ -1,11 +1,9 @@
 import React from "react";
 import "./orar.css";
-import { Welcome } from "../welcome/Welcome";
 
 export const Orar = () => {
   return (
     <div>
-      <Welcome />
       <div className="schedule-container">
         <ul className="days-list">
           <li>

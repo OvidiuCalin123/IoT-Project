@@ -1,5 +1,5 @@
 import { LogInForm } from "./logInForm";
-import { NavBar } from "../welcome/NavBar";
+import { NavBar } from "../welcome/navBar";
 
 export const LogInIndex = () => {
   return (

@@ -1,25 +1,48 @@
 import React from "react";
-import uptHeaderLogo from "../designFiles/Upt_little.png";
 import "../App.css";
 import "./menuStyles.css";
+import uptHeaderLogo from "../designFiles/Upt_little.png";
 
-export const Welcome = () => {
+export const WelcomeNavBar = ({ setShowContent, showContent }) => {
   return (
     <div>
       <header id="header-welcome">
-        <a href="/welcome" className="cantina-link">
+        <div className="cantina-link" onClick={() => setShowContent("welcome")}>
           <h2>Cantina</h2>
           <img src={uptHeaderLogo} alt="Cantina Logo" className="header-logo" />
-        </a>
+        </div>
         <nav className="menu">
-          <div className="tab-selected">
-            <a href="meniu">MENIU</a>
+          <div style={{ paddingRight: "3rem" }}>
+            <a
+              className={
+                showContent === "meniu" ? "tab-selected" : "tab-unselected"
+              }
+              onClick={() => setShowContent("meniu")}
+            >
+              <p>MENIU</p>
+            </a>
           </div>
-          <div className="tab-selected">
-            <a href="orar">ORAR</a>
+          <div style={{ paddingRight: "3rem" }}>
+            <a
+              className={
+                showContent === "orar" ? "tab-selected" : "tab-unselected"
+              }
+              onClick={() => setShowContent("orar")}
+            >
+              <p>ORAR</p>
+            </a>
           </div>
-          <div className="tab-selected">
-            <a href="contact">CONTACT</a>
+          <div style={{ paddingRight: "3rem" }}>
+            <a
+              className={
+                showContent === "contact" ? "tab-selected" : "tab-unselected"
+              }
+              onClick={() => {
+                setShowContent("contact");
+              }}
+            >
+              <p>CONTACT</p>
+            </a>
           </div>
         </nav>
       </header>

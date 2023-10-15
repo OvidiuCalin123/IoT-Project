@@ -1,9 +1,4 @@
-// import React, { useState } from "react";
-import { Welcome } from "../welcome/Welcome";
+import React from "react";
 export const Meniu = () => {
-  return (
-    <div>
-      <Welcome />
-    </div>
-  );
+  return <div></div>;
 };
