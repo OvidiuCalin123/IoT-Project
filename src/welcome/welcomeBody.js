@@ -8,7 +8,7 @@ import { Meniu } from "../menuBar/meniu";
 import uptCantinaPhoto from "../designFiles/pozaCantinaUPT.jpg";
 
 export const WelcomeBody = () => {
-  const [showContent, setShowContent] = useState("");
+  const [showContent, setShowContent] = useState("welcome");
 
   return (
     <div>
