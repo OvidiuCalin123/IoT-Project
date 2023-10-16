@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-import "./menuStyles.css";
+import "./headerMenuStyles.css";
 import uptHeaderLogo from "../designFiles/Upt_little.png";
 
 export const WelcomeNavBar = ({ setShowContent, showContent }) => {

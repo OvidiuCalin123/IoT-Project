@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
-import "./menuStyles.css";
+import "./headerMenuStyles.css";
 import { WelcomeNavBar } from "../welcome/Welcome";
 import { Contact } from "../menuBar/contact";
 import { Orar } from "../menuBar/orar";

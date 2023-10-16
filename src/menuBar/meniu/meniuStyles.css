@@ -37,3 +37,24 @@
   color: #555;
   overflow: hidden;
 }
+
+.parent {
+  margin: 0.5rem;
+  padding: 0.5rem 0.5rem;
+  text-align: center;
+}
+.child {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1rem 1rem;
+  vertical-align: middle;
+  background-color: #fff;
+  width: 10rem;
+  cursor: pointer;
+}
+
+.menu-layout {
+  display: flex;
+  flex-direction: column;
+}

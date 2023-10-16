@@ -2,6 +2,7 @@
   display: flex;
   font-size: 3vw;
   color: white;
+  cursor: pointer;
 }
 
 .tab-selected {
@@ -36,6 +37,7 @@
   justify-content: space-between;
   background-color: #050560;
   padding-bottom: 0.85px;
+  cursor: pointer;
 }
 
 header h2 {

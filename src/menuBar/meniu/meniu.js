@@ -4,17 +4,21 @@ import { data } from "./data";
 
 export const Meniu = () => {
   return (
-    <div className="menu-data">
-      <h3>Meniul zilei</h3>
-      <h4>Meniul standard</h4>
-      {data.map((item, index) => (
-        <Card
-          key={index}
-          name={item.name}
-          description={item.description}
-          price={item.price}
-        />
-      ))}
+    <div className="menu-layout">
+      <div class="parent">
+        <div class="child">Meniul zilei</div>
+        <div class="child">Meniul standard</div>
+      </div>
+      <div className="menu-data">
+        {data.map((item, index) => (
+          <Card
+            key={index}
+            name={item.name}
+            description={item.description}
+            price={item.price}
+          />
+        ))}
+      </div>
     </div>
   );
 };
