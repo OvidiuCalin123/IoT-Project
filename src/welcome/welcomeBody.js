@@ -6,6 +6,7 @@ import { Contact } from "../menuBar/contact";
 import { Orar } from "../menuBar/orar";
 import { Meniu } from "../menuBar/meniu/meniu";
 import uptCantinaPhoto from "../designFiles/pozaCantinaUPT.jpg";
+import { MeniulZilei } from "../menuBar/meniu/MeniulZilei";
 
 export const WelcomeBody = () => {
   const [showContent, setShowContent] = useState("welcome");
@@ -33,7 +34,8 @@ export const WelcomeBody = () => {
       )}
       {showContent === "orar" && <Orar />}
       {showContent === "contact" && <Contact />}
-      {showContent === "meniu" && <Meniu />}
+      {showContent === "meniu" && <Meniu setShowContent />}
+      {showContent === "meniulZilei" && <MeniulZilei setShowContent />}
     </div>
   );
 };

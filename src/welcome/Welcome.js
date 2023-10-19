@@ -5,7 +5,7 @@ import uptHeaderLogo from "../designFiles/Upt_little.png";
 
 export const WelcomeNavBar = ({ setShowContent, showContent }) => {
   return (
-    <div>
+    <div className="header-style">
       <header id="header-welcome">
         <div className="cantina-link" onClick={() => setShowContent("welcome")}>
           <h2>Cantina</h2>

@@ -68,3 +68,7 @@ header h5 {
   display: flex;
   text-decoration: none;
 }
+
+.header-welcome-padding {
+  padding-top: 4.75rem;
+}

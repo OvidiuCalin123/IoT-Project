@@ -2,7 +2,7 @@ import "../App.css";
 import uptHeaderLogo from "../designFiles/Upt_little.png";
 export const NavBar = () => {
   return (
-    <>
+    <div className="header-style">
       <head>
         <title>CantinaUPT</title>
       </head>
@@ -23,6 +23,6 @@ export const NavBar = () => {
           </div>
         </div>
       </header>
-    </>
+    </div>
   );
 };

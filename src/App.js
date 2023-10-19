@@ -13,16 +13,18 @@ import { Contact } from "./menuBar/contact";
 import { Meniu } from "./menuBar/meniu/meniu";
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route exact path="/login" element={<LogInIndex />} />
-        <Route exact path="/welcome" element={<WelcomeBody />} />
-        <Route exact path="/orar" element={<Orar />} />
-        <Route exact path="/contact" element={<Contact />} />
-        <Route exact path="/meniu" element={<Meniu />} />
-      </Routes>
-    </Router>
+    <div className="header-welcome-padding">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route exact path="/login" element={<LogInIndex />} />
+          <Route exact path="/welcome" element={<WelcomeBody />} />
+          <Route exact path="/orar" element={<Orar />} />
+          <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/meniu" element={<Meniu />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
