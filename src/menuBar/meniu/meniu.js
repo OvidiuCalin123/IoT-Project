@@ -1,16 +1,32 @@
-import React from "react";
+import { React, useState } from "react";
 import Card from "./card";
-import { data } from "./data";
+import { dataMeniulStandard } from "./dataMeniulStandard";
+import { dataMeniulZilei } from "./dataMeniulZilei";
 
 export const Meniu = () => {
+  const [changeMenuData, setChangeMenuData] = useState(dataMeniulZilei);
   return (
     <div className="menu-layout">
-      <div class="parent">
-        <div class="child">Meniul zilei</div>
-        <div class="child">Meniul standard</div>
+      <div className="parent">
+        <a
+          className="child"
+          onClick={() => {
+            setChangeMenuData(dataMeniulZilei);
+          }}
+        >
+          Meniul zilei
+        </a>
+        <a
+          className="child"
+          onClick={() => {
+            setChangeMenuData(dataMeniulStandard);
+          }}
+        >
+          Meniul standard
+        </a>
       </div>
       <div className="menu-data">
-        {data.map((item, index) => (
+        {changeMenuData.map((item, index) => (
           <Card
             key={index}
             name={item.name}
