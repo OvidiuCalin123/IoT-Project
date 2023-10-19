@@ -2,8 +2,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  padding: 1rem;
-  max-height: 67.5vh;
+  padding: 0.5rem 1rem 5.5rem 1rem;
   overflow-y: auto;
 }
 
@@ -60,6 +59,21 @@
   font-size: 2rem;
   text-decoration: none;
   color: black;
+}
+
+.clicked-menu {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1rem 1rem;
+  vertical-align: middle;
+  background-color: #2a3892;
+  width: 20rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 2rem;
+  text-decoration: none;
+  color: rgb(255, 253, 253);
 }
 
 .menu-layout {
