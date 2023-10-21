@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import "../App.css";
-import "./logInStyles.css";
+import "./register.css";
 
-export const LogInForm = () => {
+export const RegisterForm = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/welcome");
   return (
-    <div className="box-login">
-      <div className="logInStyles">
-        <h2 className="log-in-title">Log In</h2>
+    <div className="box-register">
+      <div className="registerStyles">
+        <h2 className="register-title">Register</h2>
         <form>
-          <div className="mb-3 input-holder-log-in">
+          <div className="mb-3 input-holder">
             <label for="exampleInputEmail1" className="form-label">
               Email address
             </label>
@@ -21,7 +21,7 @@ export const LogInForm = () => {
               aria-describedby="emailHelp"
             />
           </div>
-          <div className="mb-3 input-holder-log-in">
+          <div className="mb-3 input-holder">
             <label for="exampleInputPassword1" className="form-label">
               Password
             </label>
@@ -31,19 +31,16 @@ export const LogInForm = () => {
               id="exampleInputPassword1"
             />
           </div>
-          <div className="mb-3 form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" for="exampleCheck1">
-              Check me out
+          <div className="mb-3 input-holder">
+            <label for="exampleInputPassword2" className="form-label">
+              Confirm password
             </label>
+            <input
+              type="password"
+              className="form-control"
+              id="exampleInputPassword2"
+            />
           </div>
-          <a href="register" className="go-to-register">
-            Don't have an account? Click here!
-          </a>
           <button
             type="submit"
             className="btn btn-primary"

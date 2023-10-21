@@ -11,6 +11,8 @@ import { Orar } from "./menuBar/orar";
 import { WelcomeBody } from "./welcome/welcomeBody";
 import { Contact } from "./menuBar/contact";
 import { Meniu } from "./menuBar/meniu/meniu";
+import { RegisterForm } from "./register/register";
+import { RegisterIndex } from "./register/registerIndex";
 function App() {
   return (
     <div className="header-welcome-padding">
@@ -22,6 +24,7 @@ function App() {
           <Route exact path="/orar" element={<Orar />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/meniu" element={<Meniu />} />
+          <Route exact path="/register" element={<RegisterIndex />} />
         </Routes>
       </Router>
     </div>

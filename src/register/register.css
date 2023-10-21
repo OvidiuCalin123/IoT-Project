@@ -1,11 +1,12 @@
-.logInSyles {
+.registerSyles {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.box-login {
+.box-register {
+  margin-top: 2.5rem;
   background: white;
   padding: 1.5rem;
   border-radius: 5px;
@@ -17,23 +18,17 @@
   overflow-y: auto;
 }
 
-.center-log-in-form {
+.center-register-form {
   display: flex;
   justify-content: center;
 }
 
-.input-holder-log-in {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.log-in-title {
+.register-title {
   padding-bottom: 2rem;
 }
 
-.go-to-register {
+.input-holder {
   display: flex;
-  justify-content: center;
-  padding-bottom: 1rem;
+  flex-direction: column;
+  align-items: center;
 }
