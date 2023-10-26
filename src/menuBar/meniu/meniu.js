@@ -11,6 +11,31 @@ export const Meniu = () => {
   const menuDataRef = useRef(null);
 
   useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    fetch(`https://localhost:7239/api/DailyMenu`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      method: "GET",
+      mode: "cors",
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else if (response.status === 404) {
+          throw new Error("Resource not found");
+        } else if (response.status === 500) {
+          throw new Error("Internal server error");
+        } else {
+          throw new Error(`Unexpected status code: ${response.status}`);
+        }
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error.message);
+      });
     const setMaxHeight = () => {
       if (menuDataRef.current) {
         const viewportHeight = window.innerHeight;
@@ -64,9 +89,10 @@ export const Meniu = () => {
         {changeMenuData.map((item, index) => (
           <Card
             key={index}
-            name={item.name}
+            name={item.title}
             description={item.description}
-            price={item.price}
+            priceForUPT={item.priceForUPT}
+            priceForOutsiders={item.priceForOutsiders}
           />
         ))}
       </div>

@@ -1,50 +1,66 @@
 export const dataMeniulStandard = [
   {
-    name: "Hawaiian Pizza",
+    title: "Pizza Hawaii",
     description:
-      "Pizza topped with ham, pineapple, and mozzarella cheese for a sweet and savory combination.",
-    price: 10.99,
+      "Pizza cu șuncă, ananas și brânză mozzarella pentru o combinație dulce și sărată.",
+    priceForUPT: 10.99,
+    priceForOutsiders: (10.99 * 1.2).toFixed(2),
+    picture: null,
   },
   {
-    name: "Caesar Salad",
+    title: "Salată Caesar",
     description:
-      "Crisp romaine lettuce, croutons, Parmesan cheese, and Caesar dressing.",
-    price: 8.99,
+      "Salată de frunze de romană crocante, crutoane, brânză Parmezan și dressing Caesar.",
+    priceForUPT: 8.99,
+    priceForOutsiders: (8.99 * 1.2).toFixed(2),
+    picture: null,
   },
   {
-    name: "Beef Tacos",
+    title: "Taco cu Carne de Vită",
     description:
-      "Soft tortillas filled with seasoned ground beef, lettuce, cheese, and salsa.",
-    price: 9.49,
+      "Tortilă moale umplută cu carne de vită condimentată, salată, brânză și salsa.",
+    priceForUPT: 9.49,
+    priceForOutsiders: (9.49 * 1.2).toFixed(2),
+    picture: null,
   },
   {
-    name: "Sushi Combo",
+    title: "Combo Sushi",
     description:
-      "Assortment of fresh sushi rolls with a side of soy sauce, wasabi, and pickled ginger.",
-    price: 16.99,
+      "Asortiment de roluri de sushi proaspete cu sos de soia, wasabi și ghimbir murat.",
+    priceForUPT: 16.99,
+    priceForOutsiders: (16.99 * 1.2).toFixed(2),
+    picture: null,
   },
   {
-    name: "BBQ Ribs",
+    title: "Coaste de Porc BBQ",
     description:
-      "Tender, slow-cooked pork ribs basted in barbecue sauce, served with coleslaw and fries.",
-    price: 15.99,
+      "Coaste de porc fragede gătite lent în sos de barbecue, servite cu salată de varză și cartofi prăjiți.",
+    priceForUPT: 15.99,
+    priceForOutsiders: (15.99 * 1.2).toFixed(2),
+    picture: null,
   },
   {
-    name: "Mango Smoothie",
+    title: "Smoothie de Mango",
     description:
-      "Refreshing smoothie made with ripe mangoes, yogurt, and a touch of honey.",
-    price: 5.99,
+      "Smoothie răcoritor făcut din mango copt, iaurt și puțină miere.",
+    priceForUPT: 5.99,
+    priceForOutsiders: (5.99 * 1.2).toFixed(2),
+    picture: null,
   },
   {
-    name: "Vegetable Stir-Fry",
+    title: "Tocăniță de Legume",
     description:
-      "Mixed vegetables stir-fried in a savory sauce, served with rice or noodles.",
-    price: 11.49,
+      "Legume amestecate, tocate într-un sos savuros, servite cu orez sau tăieței.",
+    priceForUPT: 11.49,
+    priceForOutsiders: (11.49 * 1.2).toFixed(2),
+    picture: null,
   },
   {
-    name: "Chocolate Brownie",
+    title: "Briose de Ciocolată",
     description:
-      "Decadent chocolate brownie served warm with a scoop of vanilla ice cream.",
-    price: 6.99,
+      "Briose de ciocolată decadente, servite calde cu o înghețată de vanilie.",
+    priceForUPT: 6.99,
+    priceForOutsiders: (6.99 * 1.2).toFixed(2),
+    picture: null,
   },
 ];

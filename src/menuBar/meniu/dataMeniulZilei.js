@@ -1,14 +1,18 @@
 export const dataMeniulZilei = [
   {
-    name: "Spaghetti Carbonara",
+    title: "Spaghetti Carbonara",
     description:
-      "Classic Italian pasta dish with creamy egg and cheese sauce, pancetta, and black pepper. Classic Italian pasta dish with creamy egg and cheese sauce, pancetta, and black pepper.",
-    price: 12.99,
+      "Pasta italiană clasică cu sos cremos de ou și brânză, pancetta și piper negru.",
+    priceForUPT: 12.99,
+    priceForOutsiders: (12.99 * 1.2).toFixed(2),
+    picture: null,
   },
   {
-    name: "Chicken Alfredo",
+    title: "Pui Alfredo",
     description:
-      "Creamy fettuccine pasta with grilled chicken breast, Parmesan cheese, and garlic cream sauce.",
-    price: 14.49,
+      "Paste fettuccine cremoase cu piept de pui la grătar, brânză Parmezan și sos cremos de usturoi.",
+    priceForUPT: 14.49,
+    priceForOutsiders: (14.49 * 1.2).toFixed(2),
+    picture: null,
   },
 ];

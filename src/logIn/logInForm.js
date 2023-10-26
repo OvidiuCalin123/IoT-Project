@@ -1,10 +1,49 @@
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import "./logInStyles.css";
-
+import { useState } from "react";
 export const LogInForm = () => {
   const navigate = useNavigate();
-  const handleClick = () => navigate("/welcome");
+  const handleGoToWelcome = () => navigate("/welcome");
+  const [logInEmail, setLogInEmail] = useState();
+  const [logInPassword, setLogInPassword] = useState();
+  const [oneClickOnSubmit, setOneClickOnSubmit] = useState(false);
+  const handleLogInEmail = (e) => {
+    setLogInEmail(e.target.value);
+  };
+  const handleLogInrPassword = (e) => {
+    setLogInPassword(e.target.value);
+  };
+  const handleLogInSubmit = () => {
+    setOneClickOnSubmit(true);
+    fetch(
+      `https://localhost:7239/api/Login?email=${logInEmail}&password=${logInPassword}`,
+      {
+        method: "GET",
+        mode: "cors",
+      }
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else if (response.status === 404) {
+          throw new Error("Resource not found");
+        } else if (response.status === 500) {
+          throw new Error("Internal server error");
+        } else {
+          throw new Error(`Unexpected status code: ${response.status}`);
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("accessToken", data.token);
+        handleGoToWelcome();
+      })
+      .catch((error) => {
+        setOneClickOnSubmit(false);
+        console.error("Fetch error:", error.message);
+      });
+  };
   return (
     <div className="box-login">
       <div className="logInStyles">
@@ -19,6 +58,7 @@ export const LogInForm = () => {
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              onChange={handleLogInEmail}
             />
           </div>
           <div className="mb-3 input-holder-log-in">
@@ -29,6 +69,7 @@ export const LogInForm = () => {
               type="password"
               className="form-control"
               id="exampleInputPassword1"
+              onChange={handleLogInrPassword}
             />
           </div>
           <div className="mb-3 form-check">
@@ -46,8 +87,9 @@ export const LogInForm = () => {
           </a>
           <button
             type="submit"
+            disabled={oneClickOnSubmit}
             className="btn btn-primary"
-            onClick={handleClick}
+            onClick={handleLogInSubmit}
           >
             Submit
           </button>

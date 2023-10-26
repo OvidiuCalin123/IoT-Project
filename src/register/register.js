@@ -8,6 +8,7 @@ export const RegisterForm = () => {
   const navigate = useNavigate();
   const [registerEmail, setRegisterEmail] = useState();
   const [registerPassword, setRegisterPassword] = useState();
+  const [oneClickOnSubmit, setOneClickOnSubmit] = useState(false);
   const handleRegisterName = (e) => {
     setRegisterEmail(e.target.value);
   };
@@ -15,6 +16,7 @@ export const RegisterForm = () => {
     setRegisterPassword(e.target.value);
   };
   const handleClick = () => {
+    setOneClickOnSubmit(true);
     fetch(
       `https://localhost:7239/api/Login?email=${registerEmail}&password=${registerPassword}`,
       {
@@ -34,6 +36,7 @@ export const RegisterForm = () => {
         }
       })
       .catch((error) => {
+        setOneClickOnSubmit(false);
         console.error("Fetch error:", error.message);
       });
   };
@@ -76,7 +79,12 @@ export const RegisterForm = () => {
             id="exampleInputPassword2"
           />
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleClick}>
+        <button
+          type="submit"
+          disabled={oneClickOnSubmit}
+          className="btn btn-primary"
+          onClick={handleClick}
+        >
           Submit
         </button>
       </div>
