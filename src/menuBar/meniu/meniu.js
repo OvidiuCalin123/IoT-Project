@@ -1,62 +1,30 @@
 import { React, useState, useRef, useEffect } from "react";
-import Card from "./card";
-import { dataMeniulStandard } from "./dataMeniulStandard";
-import { dataMeniulZilei } from "./dataMeniulZilei";
+import { showMenuCards } from "./helperFunctions/showMenuCards/showMenuCards";
+import { getDailyMenu } from "./helperFunctions/apiRequest/getDailyMenu";
+import { getStandardMenu } from "./helperFunctions/apiRequest/getStandardMenu";
+import { setMaxHeight } from "./helperFunctions/getScreenMaxHeight";
+
+let isUPT = null;
 
 export const Meniu = () => {
-  const [changeMenuData, setChangeMenuData] = useState(dataMeniulZilei);
+  const [menuDataDaily, setMenuDataDaily] = useState([]);
+  const [menuDataStandard, setMenuDataStandard] = useState([]);
   const [showVisualMenuSelected, setShowVisualMenuSelected] =
     useState("meniulZilei");
 
   const menuDataRef = useRef(null);
 
+  const getIsUPT = (isUserUPT) => {
+    isUPT = isUserUPT;
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    fetch(`https://localhost:7239/api/DailyMenu`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      method: "GET",
-      mode: "cors",
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else if (response.status === 404) {
-          throw new Error("Resource not found");
-        } else if (response.status === 500) {
-          throw new Error("Internal server error");
-        } else {
-          throw new Error(`Unexpected status code: ${response.status}`);
-        }
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Fetch error:", error.message);
-      });
-    const setMaxHeight = () => {
-      if (menuDataRef.current) {
-        const viewportHeight = window.innerHeight;
-        const menuLayout = menuDataRef.current.parentElement;
-        const menuLayoutHeight = menuLayout.getBoundingClientRect().height;
-
-        const maxHeight =
-          viewportHeight -
-          (menuLayoutHeight - menuDataRef.current.offsetHeight);
-
-        menuDataRef.current.style.maxHeight = `${maxHeight}px`;
-      }
-    };
-
-    setMaxHeight();
-    window.addEventListener("resize", setMaxHeight);
-
-    return () => {
-      window.removeEventListener("resize", setMaxHeight);
-    };
+    getDailyMenu(token, setMenuDataDaily, getIsUPT);
+    getStandardMenu(token, setMenuDataStandard);
+    setMaxHeight(menuDataRef);
   }, []);
+
   return (
     <div className="menu-layout">
       <div className="parent">
@@ -65,7 +33,6 @@ export const Meniu = () => {
             showVisualMenuSelected === "meniulZilei" ? "clicked-menu" : "child"
           }
           onClick={() => {
-            setChangeMenuData(dataMeniulZilei);
             setShowVisualMenuSelected("meniulZilei");
           }}
         >
@@ -78,7 +45,6 @@ export const Meniu = () => {
               : "child"
           }
           onClick={() => {
-            setChangeMenuData(dataMeniulStandard);
             setShowVisualMenuSelected("meniulStandard");
           }}
         >
@@ -86,15 +52,12 @@ export const Meniu = () => {
         </a>
       </div>
       <div className="menu-data" ref={menuDataRef}>
-        {changeMenuData.map((item, index) => (
-          <Card
-            key={index}
-            name={item.title}
-            description={item.description}
-            priceForUPT={item.priceForUPT}
-            priceForOutsiders={item.priceForOutsiders}
-          />
-        ))}
+        {showMenuCards(
+          showVisualMenuSelected,
+          menuDataDaily,
+          menuDataStandard,
+          isUPT
+        )}
       </div>
     </div>
   );

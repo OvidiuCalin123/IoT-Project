@@ -97,6 +97,9 @@
 
 .price-upt {
   padding-left: 0.5rem;
+}
+
+.available-price {
   font-weight: bold;
   color: black;
 }

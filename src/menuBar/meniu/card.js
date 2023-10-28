@@ -1,32 +1,69 @@
 import React, { useState } from "react";
 import "./meniuStyles.css";
+import { updateDailyMenuItemPicture } from "./helperFunctions/apiRequest/putDailyMenuPicture";
 
-const Card = ({ name, description, priceForUPT, priceForOutsiders }) => {
+export const Card = ({
+  title,
+  description,
+  priceForUPT,
+  priceOutsidersUPT,
+  cardPrimaryKey,
+  isUserUPT,
+}) => {
+  const token = localStorage.getItem("accessToken");
   const [image, setImage] = useState(null);
-
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+    const picture = event.target.files[0];
+    // Ensure that a file was selected
+    if (!picture) {
+      return;
+    }
 
+    const reader = new FileReader();
     reader.onload = (e) => {
-      setImage(e.target.result);
+      const imageDataUrl = e.target.result;
+
+      fetch(imageDataUrl)
+        .then((res) => res.blob())
+        .then((imageBlob) => {
+          updateDailyMenuItemPicture(token, cardPrimaryKey, {
+            title,
+            description,
+            priceForUPT,
+            priceOutsidersUPT,
+            picture: imageBlob,
+          });
+        });
+      setImage(imageDataUrl);
     };
 
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    reader.readAsDataURL(picture);
   };
 
   return (
     <div className="card">
       <div style={{ maxWidth: "20rem", paddingRight: "1rem" }}>
-        <h2>{name}</h2>
+        <h2>{title}</h2>
         <p className="description">{description}</p>
         <div className="price-in-card">
           <b>Preț: </b>
-          <p className="price-upt">{priceForUPT} RON</p>
-          <p className="price-outsiders not-available-price">
-            {priceForOutsiders} RON
+          <p
+            className={
+              isUserUPT
+                ? "price-upt available-price"
+                : "price-upt not-available-price"
+            }
+          >
+            {priceForUPT} RON
+          </p>
+          <p
+            className={
+              isUserUPT
+                ? "price-outsiders not-available-price"
+                : "price-outsiders available-price"
+            }
+          >
+            {priceOutsidersUPT} RON
           </p>
         </div>
       </div>
@@ -55,5 +92,3 @@ const Card = ({ name, description, priceForUPT, priceForOutsiders }) => {
     </div>
   );
 };
-
-export default Card;
