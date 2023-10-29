@@ -114,7 +114,7 @@ export const Meniu = () => {
             <span className="close" onClick={closeModal}>
               &times;
             </span>
-            <h2>Adaugă Title</h2>
+            <h2>Adaugă meniu</h2>
             <p>Modal content goes here.</p>
           </div>
         </div>
@@ -126,7 +126,7 @@ export const Meniu = () => {
             <span className="close" onClick={closeModal}>
               &times;
             </span>
-            <h2>Șterge Title</h2>
+            <h2>Șterge meniu</h2>
             <p>Modal content goes here.</p>
           </div>
         </div>
