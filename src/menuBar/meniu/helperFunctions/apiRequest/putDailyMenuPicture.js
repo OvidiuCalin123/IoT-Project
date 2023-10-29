@@ -11,8 +11,8 @@ export const updateDailyMenuItemPicture = (
   formData.append("id", id);
   formData.append("title", title);
   formData.append("description", description);
-  formData.append("priceForUPT", priceForUPT);
-  formData.append("priceOutsidersUPT", priceOutsidersUPT);
+  //formData.append("priceForUPT", priceForUPT);
+  //formData.append("priceOutsidersUPT", priceOutsidersUPT);
 
   return fetch(apiUrl, {
     method: "PUT",
