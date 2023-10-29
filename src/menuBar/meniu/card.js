@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./meniuStyles.css";
 import { updateDailyMenuItemPicture } from "./helperFunctions/apiRequest/putDailyMenuPicture";
 
@@ -9,35 +9,35 @@ export const Card = ({
   priceOutsidersUPT,
   cardPrimaryKey,
   isUserUPT,
+  foodImage,
 }) => {
   const token = localStorage.getItem("accessToken");
   const [image, setImage] = useState(null);
-  const handleImageUpload = (event) => {
+
+  const fileInputRef = useRef();
+
+  const handleImageUpload = async () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = async (event) => {
     const picture = event.target.files[0];
-    // Ensure that a file was selected
-    if (!picture) {
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const imageDataUrl = e.target.result;
-
-      fetch(imageDataUrl)
-        .then((res) => res.blob())
-        .then((imageBlob) => {
-          updateDailyMenuItemPicture(token, cardPrimaryKey, {
-            title,
-            description,
-            priceForUPT,
-            priceOutsidersUPT,
-            picture: imageBlob,
-          });
+    if (picture) {
+      try {
+        await updateDailyMenuItemPicture(token, cardPrimaryKey, {
+          title,
+          description,
+          priceForUPT,
+          priceOutsidersUPT,
+          isUserUPT,
+          picture,
         });
-      setImage(imageDataUrl);
-    };
-
-    reader.readAsDataURL(picture);
+        const imageUrl = URL.createObjectURL(picture);
+        setImage(imageUrl);
+      } catch (error) {
+        console.error("Image upload error:", error);
+      }
+    }
   };
 
   return (
@@ -67,26 +67,29 @@ export const Card = ({
           </p>
         </div>
       </div>
-      <div
-        className="food-picture"
-        style={{
-          minWidth: "15rem",
-          minHeight: "10rem",
-          maxWidth: "15rem",
-          maxHeight: "10rem",
-          backgroundColor: "blue",
-          borderRadius: "5%",
-          backgroundImage: `url(${image})`,
-          backgroundSize: "cover",
-          cursor: "pointer",
-        }}
-        onClick={() => document.getElementById("imageInput").click()}
-      >
+      <div>
+        <img
+          src={`data:image/png;base64,${foodImage}`}
+          className="food-picture"
+          style={{
+            minWidth: "15rem",
+            minHeight: "10rem",
+            maxWidth: "15rem",
+            maxHeight: "10rem",
+            backgroundColor: "blue",
+            borderRadius: "5%",
+            backgroundImage: `url(${image})`,
+            backgroundSize: "cover",
+            cursor: "pointer",
+          }}
+          alt="NO_IMAGE_FOUND"
+          onClick={handleImageUpload}
+        />
         <input
+          ref={fileInputRef}
           type="file"
-          id="imageInput"
           style={{ display: "none" }}
-          onChange={handleImageUpload}
+          onChange={handleFileChange}
         />
       </div>
     </div>

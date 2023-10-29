@@ -5,23 +5,21 @@ export const updateDailyMenuItemPicture = (
 ) => {
   const apiUrl = `https://localhost:7239/api/DailyMenu/Picture/${id}`;
 
-  const updatedItem = {
-    title,
-    description,
-    priceForUPT,
-    priceOutsidersUPT,
-    picture,
-  };
+  const formData = new FormData();
 
-  const headers = new Headers();
-  headers.append("Authorization", `Bearer ${token}`);
-  headers.append("Content-Type", "application/json");
+  formData.append("image", picture);
+  formData.append("id", id);
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("priceForUPT", priceForUPT);
+  formData.append("priceOutsidersUPT", priceOutsidersUPT);
 
   return fetch(apiUrl, {
     method: "PUT",
-    mode: "cors",
-    headers: headers,
-    body: JSON.stringify(updatedItem),
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
   })
     .then((response) => {
       if (response.ok) {
