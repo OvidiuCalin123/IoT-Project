@@ -1,0 +1,146 @@
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  position: relative;
+  border-radius: 8px;
+  height: 87.5%;
+}
+
+.add-menu-title {
+  padding-left: 1.75rem;
+  display: flex;
+  justify-content: center;
+  font-weight: bolder;
+}
+
+.title-modal {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-modal-text {
+  text-decoration: underline;
+  font-weight: bold;
+  color: black;
+  font-size: 150%;
+  padding-bottom: 0.5rem;
+}
+
+.title-modal-content {
+  height: 100%;
+  width: 97.5%;
+  border-color: black;
+}
+
+.description-modal {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.description-modal-text {
+  text-decoration: underline;
+  font-weight: bold;
+  color: black;
+  font-size: 150%;
+  padding-bottom: 0.5rem;
+}
+
+.description-modal-content {
+  height: 8rem;
+  width: 97.5%;
+  border-color: black;
+}
+
+.price-upt-modal-text {
+  text-decoration: underline;
+  font-weight: bold;
+  color: black;
+  font-size: 150%;
+  padding-bottom: 0.5rem;
+}
+
+.price-upt-modal-content {
+  height: 100%;
+  width: 97.5%;
+  border-color: black;
+}
+
+.price-upt-modal {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.price-outsiders-upt-modal {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.price-outsiders-modal-text {
+  text-decoration: underline;
+  font-weight: bold;
+  color: black;
+  font-size: 150%;
+  padding-bottom: 0.5rem;
+}
+
+.price-outsiders-modal-content {
+  height: 100%;
+  width: 97.5%;
+  border-color: black;
+}
+
+.save-modal-button {
+  background-color: rgb(10, 236, 175);
+  width: 4.25rem;
+  border-radius: 0.5rem;
+}
+
+.save-modal {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.columns-modal {
+  display: flex;
+
+  justify-content: center;
+}
+
+.column-left-modal {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding-right: 0.25rem;
+}
+
+.column-right-modal {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding-left: 0.25rem;
+}
+
+.add-photo-text {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-photo {
+  padding-top: 0.5rem;
+  width: 5rem;
+  cursor: pointer;
+}
+
+.chose-photo-modal {
+  display: flex;
+  padding-top: 0.5rem;
+  justify-content: center;
+}

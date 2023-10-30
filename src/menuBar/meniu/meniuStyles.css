@@ -120,16 +120,6 @@
   align-items: center;
 }
 
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 60%;
-  position: relative;
-  border-radius: 8px;
-  height: 85%;
-}
-
 .close {
   color: #aaa;
   float: right;
@@ -146,6 +136,7 @@
 
 .add-delete {
   padding-top: 1rem;
+  margin-left: -0.65rem;
 }
 
 .add {

@@ -3,6 +3,7 @@ import { showMenuCards } from "./helperFunctions/showMenuCards/showMenuCards";
 import { getDailyMenu } from "./helperFunctions/apiRequest/getDailyMenu";
 import { getStandardMenu } from "./helperFunctions/apiRequest/getStandardMenu";
 import { setMaxHeight } from "./helperFunctions/getScreenMaxHeight";
+import Modal from "./modalOperations";
 
 let isUPT = null;
 
@@ -44,16 +45,17 @@ export const Meniu = () => {
     setDeleteModal(true);
   };
 
+  const handleSaveClick = () => {
+    const titlu = document.getElementById("titlu").value;
+    const descriere = document.getElementById("descriere").value;
+    const pretUPT = document.getElementById("pretUPT").value;
+    const pretOutsiders = document.getElementById("pretOutsiders").value;
+    const photoFile = document.getElementById("photo").files[0];
+  };
+
   return (
     <div className="menu-layout">
-      <div
-        className="parent"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div className="parent">
         <div>
           <a
             className={
@@ -107,30 +109,14 @@ export const Meniu = () => {
           isUPT
         )}
       </div>
-      {/* Modal */}
-      {isModalOpen && useAddModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>
-              &times;
-            </span>
-            <h2>Adaugă meniu</h2>
-            <p>Modal content goes here.</p>
-          </div>
-        </div>
-      )}
-      else
-      {isModalOpen && useDeleteModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>
-              &times;
-            </span>
-            <h2>Șterge meniu</h2>
-            <p>Modal content goes here.</p>
-          </div>
-        </div>
-      )}
+      {/* Use the Modal component here */}
+      <Modal
+        isModalOpen={isModalOpen}
+        useAddModal={useAddModal}
+        useDeleteModal={useDeleteModal}
+        closeModal={closeModal}
+        handleSaveClick={handleSaveClick}
+      />
     </div>
   );
 };
