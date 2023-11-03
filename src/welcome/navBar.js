@@ -18,7 +18,7 @@ export const NavBar = () => {
               />
             </div>
             <div className="header-content-right">
-              <h5>...since 1930</h5>
+              <h5>...din 1930</h5>
             </div>
           </div>
         </div>

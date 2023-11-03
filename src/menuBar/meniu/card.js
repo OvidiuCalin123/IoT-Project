@@ -61,8 +61,18 @@ export const Card = ({
   const handleCheckboxChange = () => {
     if (isChecked === true) {
       setIsChecked(false);
+      setSelectedCardsPrimaryKey({
+        cardPrimaryKey: cardPrimaryKey,
+        isCheckBoxSelected: false,
+        menuType: menuType,
+      });
     } else {
       setIsChecked(true);
+      setSelectedCardsPrimaryKey({
+        cardPrimaryKey: cardPrimaryKey,
+        isCheckBoxSelected: true,
+        menuType: menuType,
+      });
     }
   };
   return (

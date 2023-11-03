@@ -5,8 +5,12 @@ import { getStandardMenu } from "./helperFunctions/apiRequest/getStandardMenu";
 import { setMaxHeight } from "./helperFunctions/getScreenMaxHeight";
 import Modal from "./modalOperations";
 import { getIsAdmin } from "./helperFunctions/apiRequest/getIsAdmin";
+import { deleteDailyMenuItems } from "./helperFunctions/apiRequest/deleteDailyMenuItems";
+import { deleteStandardMenuItems } from "./helperFunctions/apiRequest/deleteStandardMenuItems";
 
 let isUPT = null;
+let selectedCardsPK = [];
+let selectedStandardCardsPK = [];
 
 export const Meniu = () => {
   const [menuDataDaily, setMenuDataDaily] = useState([]);
@@ -17,9 +21,45 @@ export const Meniu = () => {
   const [useAddModal, setAddModal] = useState(false);
   const [useDeleteModal, setDeleteModal] = useState(false);
   const [isUserAdmin, setIsUserAdmin] = useState();
-  const [selectedCardsPrimaryKey, setSelectedCardsPrimary] = useState({});
+  const [updateFlag, setUpdateFlag] = useState(false);
   const handleDelete = () => {
-    console.log(selectedCardsPrimaryKey);
+    const token = localStorage.getItem("accessToken");
+    console.log(selectedCardsPK, selectedStandardCardsPK);
+
+    if (showVisualMenuSelected === "meniulZilei") {
+      deleteDailyMenuItems(token, selectedCardsPK);
+    } else {
+      deleteStandardMenuItems(token, selectedStandardCardsPK);
+    }
+
+    setUpdateFlag(!updateFlag);
+  };
+
+  const setSelectedCardsPrimaryKey = ({
+    cardPrimaryKey,
+    isCheckBoxSelected,
+    menuType,
+  }) => {
+    if (isCheckBoxSelected === true) {
+      if (menuType === "daily") {
+        selectedCardsPK.push(cardPrimaryKey);
+      } else {
+        selectedStandardCardsPK.push(cardPrimaryKey);
+      }
+    } else {
+      if (menuType === "daily") {
+        const index = selectedCardsPK.indexOf(cardPrimaryKey);
+        if (index !== -1) {
+          selectedCardsPK.splice(index, 1);
+        }
+      } else {
+        const index = selectedStandardCardsPK.indexOf(cardPrimaryKey);
+        if (index !== -1) {
+          selectedStandardCardsPK.splice(index, 1);
+        }
+      }
+    }
+    console.log(selectedCardsPK);
   };
 
   const menuDataRef = useRef(null);
@@ -27,16 +67,18 @@ export const Meniu = () => {
   const getIsUPT = (isUserUPT) => {
     isUPT = isUserUPT;
   };
+
   const getIsUserAdmin = (isUserAdmin) => {
     setIsUserAdmin(isUserAdmin);
   };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     getIsAdmin(token, getIsUserAdmin);
     getDailyMenu(token, setMenuDataDaily, getIsUPT);
     getStandardMenu(token, setMenuDataStandard);
     setMaxHeight(menuDataRef);
-  }, []);
+  }, [updateFlag]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -60,10 +102,6 @@ export const Meniu = () => {
     const pretUPT = document.getElementById("pretUPT").value;
     const pretOutsiders = document.getElementById("pretOutsiders").value;
     const photoFile = document.getElementById("photo").files[0];
-  };
-  const setSelectedCardsPrimaryKey = (primaryKey) => {
-    setSelectedCardsPrimary(primaryKey);
-    console.log(primaryKey);
   };
 
   return (
@@ -120,8 +158,7 @@ export const Meniu = () => {
           menuDataStandard,
           isUPT,
           isUserAdmin,
-          setSelectedCardsPrimaryKey,
-          selectedCardsPrimaryKey
+          setSelectedCardsPrimaryKey
         )}
       </div>
       {/* Use the Modal component here */}
