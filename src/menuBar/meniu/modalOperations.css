@@ -24,7 +24,7 @@
 .title-modal-text {
   text-decoration: underline;
   font-weight: bold;
-  color: black;
+  color: #212529;
   font-size: 150%;
   padding-bottom: 0.5rem;
 }
@@ -44,7 +44,7 @@
 .description-modal-text {
   text-decoration: underline;
   font-weight: bold;
-  color: black;
+  color: #212529;
   font-size: 150%;
   padding-bottom: 0.5rem;
 }
@@ -58,7 +58,7 @@
 .price-upt-modal-text {
   text-decoration: underline;
   font-weight: bold;
-  color: black;
+  color: #212529;
   font-size: 150%;
   padding-bottom: 0.5rem;
 }
@@ -84,7 +84,7 @@
 .price-outsiders-modal-text {
   text-decoration: underline;
   font-weight: bold;
-  color: black;
+  color: #212529;
   font-size: 150%;
   padding-bottom: 0.5rem;
 }

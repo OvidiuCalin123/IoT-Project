@@ -154,3 +154,9 @@
   border-color: transparent;
   padding: 0.5rem;
 }
+
+.checkbox-div {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.25rem;
+}

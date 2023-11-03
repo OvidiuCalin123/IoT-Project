@@ -5,11 +5,13 @@ export const showMenuCards = (
   showVisualMenuSelected,
   menuDataDaily,
   menuDataStandard,
-  isUPT
+  isUPT,
+  isUserAdmin,
+  setSelectedCardsPrimaryKey,
+  selectedCardsPrimaryKey
 ) => {
   if (showVisualMenuSelected === "meniulZilei") {
     return menuDataDaily.map((item) => {
-      console.log(item.id);
       return (
         <Card
           key={uuidv4()}
@@ -20,6 +22,10 @@ export const showMenuCards = (
           cardPrimaryKey={item.id}
           isUserUPT={isUPT}
           foodImage={item.picture}
+          menuType={"daily"}
+          isUserAdmin={isUserAdmin}
+          selectedCardsPrimaryKey={selectedCardsPrimaryKey}
+          setSelectedCardsPrimaryKey={setSelectedCardsPrimaryKey}
         />
       );
     });
@@ -34,6 +40,10 @@ export const showMenuCards = (
         cardPrimaryKey={item.id}
         isUserUPT={isUPT}
         foodImage={item.picture}
+        menuType={"standard"}
+        isUserAdmin={isUserAdmin}
+        selectedCardsPrimaryKey={selectedCardsPrimaryKey}
+        setSelectedCardsPrimaryKey={setSelectedCardsPrimaryKey}
       />
     ));
   }

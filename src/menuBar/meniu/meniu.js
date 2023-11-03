@@ -4,6 +4,7 @@ import { getDailyMenu } from "./helperFunctions/apiRequest/getDailyMenu";
 import { getStandardMenu } from "./helperFunctions/apiRequest/getStandardMenu";
 import { setMaxHeight } from "./helperFunctions/getScreenMaxHeight";
 import Modal from "./modalOperations";
+import { getIsAdmin } from "./helperFunctions/apiRequest/getIsAdmin";
 
 let isUPT = null;
 
@@ -15,15 +16,23 @@ export const Meniu = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [useAddModal, setAddModal] = useState(false);
   const [useDeleteModal, setDeleteModal] = useState(false);
+  const [isUserAdmin, setIsUserAdmin] = useState();
+  const [selectedCardsPrimaryKey, setSelectedCardsPrimary] = useState({});
+  const handleDelete = () => {
+    console.log(selectedCardsPrimaryKey);
+  };
 
   const menuDataRef = useRef(null);
 
   const getIsUPT = (isUserUPT) => {
     isUPT = isUserUPT;
   };
-
+  const getIsUserAdmin = (isUserAdmin) => {
+    setIsUserAdmin(isUserAdmin);
+  };
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
+    getIsAdmin(token, getIsUserAdmin);
     getDailyMenu(token, setMenuDataDaily, getIsUPT);
     getStandardMenu(token, setMenuDataStandard);
     setMaxHeight(menuDataRef);
@@ -52,6 +61,10 @@ export const Meniu = () => {
     const pretOutsiders = document.getElementById("pretOutsiders").value;
     const photoFile = document.getElementById("photo").files[0];
   };
+  const setSelectedCardsPrimaryKey = (primaryKey) => {
+    setSelectedCardsPrimary(primaryKey);
+    console.log(primaryKey);
+  };
 
   return (
     <div className="menu-layout">
@@ -78,35 +91,37 @@ export const Meniu = () => {
             Meniul standard
           </a>
         </div>
-        <div className="add-delete">
-          <button
-            className="add"
-            style={{ marginRight: "0.3rem" }}
-            onClick={() => {
-              openModal();
-              setAddModal(true);
-            }}
-          >
-            Adaugă
-          </button>
-          <button
-            className="delete"
-            style={{ marginLeft: "0.1rem" }}
-            onClick={() => {
-              openModal();
-              setDeleteModal(true);
-            }}
-          >
-            Șterge
-          </button>
-        </div>
+        {isUserAdmin && (
+          <div className="add-delete">
+            <button
+              className="add"
+              style={{ marginRight: "0.3rem" }}
+              onClick={() => {
+                openModal();
+                setAddModal(true);
+              }}
+            >
+              Adaugă
+            </button>
+            <button
+              className="delete"
+              style={{ marginLeft: "0.1rem" }}
+              onClick={handleDelete}
+            >
+              Șterge
+            </button>
+          </div>
+        )}
       </div>
       <div className="menu-data" ref={menuDataRef}>
         {showMenuCards(
           showVisualMenuSelected,
           menuDataDaily,
           menuDataStandard,
-          isUPT
+          isUPT,
+          isUserAdmin,
+          setSelectedCardsPrimaryKey,
+          selectedCardsPrimaryKey
         )}
       </div>
       {/* Use the Modal component here */}
