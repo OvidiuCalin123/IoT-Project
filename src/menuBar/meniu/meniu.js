@@ -168,6 +168,7 @@ export const Meniu = () => {
         useDeleteModal={useDeleteModal}
         closeModal={closeModal}
         handleSaveClick={handleSaveClick}
+        menuType={showVisualMenuSelected}
       />
     </div>
   );

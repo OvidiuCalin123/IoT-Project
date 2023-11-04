@@ -1,18 +1,61 @@
 import React, { useState } from "react";
 import "./modalOperations.css";
 import uploadPhoto from "./upload-image.png";
+import { insertDailyMenuCard } from "./helperFunctions/apiRequest/insertDailyMenuCard";
 
 const Modal = ({
   isModalOpen,
   useAddModal,
   useDeleteModal,
   closeModal,
-  handleSaveClick,
+  menuType,
 }) => {
   const [uptPrice, setUptPrice] = useState("");
   const [nonUptPrice, setNonUptPrice] = useState("");
+  const [image, setImage] = useState(null);
+
+  const [insertCardData, setInsertCardData] = useState({
+    title: "",
+    description: "",
+    priceForUPT: 0.0,
+    priceOutsidersUPT: 0.0,
+    image: null,
+  });
+
+  const onInsertNewCardSave = async () => {
+    console.log(insertCardData);
+
+    if (menuType === "meniulZilei") {
+      const token = localStorage.getItem("accessToken");
+      await insertDailyMenuCard(token, insertCardData);
+    } else if (menuType === "meniulStandard") {
+    }
+  };
+
+  const handleTitleChange = (e) => {
+    setInsertCardData({ ...insertCardData, title: e.target.value });
+  };
+
+  const handleDescriptionChange = (e) => {
+    setInsertCardData({ ...insertCardData, description: e.target.value });
+  };
 
   const handleUptPriceChange = (event) => {
+    setInsertCardData({
+      title: insertCardData.title,
+      description: insertCardData.description,
+      priceOutsidersUPT: insertCardData.priceOutsidersUPT,
+      image: insertCardData.image,
+      priceForUPT: event.target.value * 1.0,
+    });
+
+    setInsertCardData({
+      title: insertCardData.title,
+      description: insertCardData.description,
+      image: insertCardData.image,
+      priceForUPT: event.target.value * 1.0,
+      priceOutsidersUPT: event.target.value * 1.2,
+    });
     const inputValue = event.target.value;
     const regex = /^\d+(\.\d{0,2})?$/;
 
@@ -21,6 +64,19 @@ const Modal = ({
       const newNonUptPrice = (parseFloat(newUptPrice) * 1.2).toFixed(2);
       setUptPrice(newUptPrice);
       setNonUptPrice(newNonUptPrice);
+    }
+  };
+
+  const handleFileChange = async (event) => {
+    const picture = event.target.files[0];
+    setInsertCardData({ ...insertCardData, image: picture });
+    if (picture) {
+      try {
+        const imageUrl = URL.createObjectURL(picture);
+        setImage(imageUrl);
+      } catch (error) {
+        console.error("Image upload error:", error);
+      }
     }
   };
 
@@ -44,6 +100,7 @@ const Modal = ({
                     type="text"
                     id="titlu"
                     name="titlu"
+                    onChange={handleTitleChange}
                   />
                 </div>
                 <div className="description-modal">
@@ -53,6 +110,7 @@ const Modal = ({
                     type="text"
                     id="descriere"
                     name="descriere"
+                    onChange={handleDescriptionChange}
                   />
                 </div>
                 <div className="price-upt-modal"></div>
@@ -84,12 +142,21 @@ const Modal = ({
               </div>
             </div>
             <div className="chose-photo-modal">
-              <img src={uploadPhoto} alt="poza Cantina" className="add-photo" />{" "}
+              <img
+                src={image ?? uploadPhoto}
+                alt="poza Cantina"
+                className="add-photo"
+              />
             </div>
-            <label className="add-photo-text">Adaugă o imagine</label>
-
+            <label className="add-photo-text">
+              <input type="file" onChange={handleFileChange} />
+              Adaugă o imagine
+            </label>
             <div className="save-modal">
-              <button className="save-modal-button" onClick={handleSaveClick}>
+              <button
+                className="save-modal-button"
+                onClick={onInsertNewCardSave}
+              >
                 Salvare
               </button>
             </div>
