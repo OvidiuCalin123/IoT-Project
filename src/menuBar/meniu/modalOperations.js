@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./modalOperations.css";
 import uploadPhoto from "./upload-image.png";
 
@@ -9,6 +9,21 @@ const Modal = ({
   closeModal,
   handleSaveClick,
 }) => {
+  const [uptPrice, setUptPrice] = useState("");
+  const [nonUptPrice, setNonUptPrice] = useState("");
+
+  const handleUptPriceChange = (event) => {
+    const inputValue = event.target.value;
+    const regex = /^\d+(\.\d{0,2})?$/;
+
+    if (regex.test(inputValue)) {
+      const newUptPrice = inputValue;
+      const newNonUptPrice = (parseFloat(newUptPrice) * 1.2).toFixed(2);
+      setUptPrice(newUptPrice);
+      setNonUptPrice(newNonUptPrice);
+    }
+  };
+
   return (
     <div>
       {isModalOpen && useAddModal && (
@@ -40,6 +55,7 @@ const Modal = ({
                     name="descriere"
                   />
                 </div>
+                <div className="price-upt-modal"></div>
               </div>
               <div className="column-right-modal">
                 <div className="price-upt-modal">
@@ -49,6 +65,8 @@ const Modal = ({
                     type="text"
                     id="pretUPT"
                     name="pretUPT"
+                    value={uptPrice}
+                    onChange={handleUptPriceChange}
                   />
                 </div>
                 <div className="price-outsiders-upt-modal">
@@ -60,6 +78,7 @@ const Modal = ({
                     type="text"
                     id="pretOutsiders"
                     name="pretOutsiders"
+                    value={nonUptPrice}
                   />
                 </div>
               </div>
