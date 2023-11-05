@@ -1,13 +1,12 @@
-export const updateDailyMenuItemPicture = (
+export const updateDailyMenuCard = (
   token,
   id,
-  { title, description, priceForUPT, priceOutsidersUPT, picture }
+  { title, description, priceForUPT, priceOutsidersUPT }
 ) => {
-  const apiUrl = `https://localhost:7239/api/DailyMenu/Picture/${id}`;
+  const apiUrl = `https://localhost:7239/api/DailyMenu/CardMenu/${id}`;
 
   const formData = new FormData();
 
-  formData.append("image", picture);
   formData.append("id", id);
   formData.append("title", title);
   formData.append("description", description);

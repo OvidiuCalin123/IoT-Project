@@ -3,6 +3,7 @@ import "./meniuStyles.css";
 import { updateDailyMenuItemPicture } from "./helperFunctions/apiRequest/putDailyMenuPicture";
 import { updateStandardMenuItemPicture } from "./helperFunctions/apiRequest/putStandardMenu";
 import { v4 as uuidv4 } from "uuid";
+import EditCardModal from "./editCardModal";
 
 export const Card = ({
   title,
@@ -29,6 +30,7 @@ export const Card = ({
 
   const handleFileChange = async (event) => {
     const picture = event.target.files[0];
+
     if (picture) {
       try {
         if (menuType === "daily") {
@@ -75,90 +77,121 @@ export const Card = ({
       });
     }
   };
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const openEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
   return (
-    <div className="card">
-      <div style={{ maxWidth: "20rem", paddingRight: "1rem" }}>
-        <h2>{title}</h2>
-        <p className="description">{description}</p>
-        <div className="price-in-card">
-          <b>Preț: </b>
-          <p
-            className={
-              isUserUPT
-                ? "price-upt available-price"
-                : "price-upt not-available-price"
-            }
-          >
-            {priceForUPT} RON
-          </p>
-          <p
-            className={
-              isUserUPT
-                ? "price-outsiders not-available-price"
-                : "price-outsiders available-price"
-            }
-          >
-            {priceOutsidersUPT} RON
-          </p>
+    <>
+      <div className="card">
+        <div style={{ maxWidth: "20rem", paddingRight: "1rem" }}>
+          <h2>{title}</h2>
+          <p className="description">{description}</p>
+          <div className="price-in-card">
+            <b>Preț: </b>
+            <p
+              className={
+                isUserUPT
+                  ? "price-upt available-price"
+                  : "price-upt not-available-price"
+              }
+            >
+              {priceForUPT} RON
+            </p>
+            <p
+              className={
+                isUserUPT
+                  ? "price-outsiders not-available-price"
+                  : "price-outsiders available-price"
+              }
+            >
+              {priceOutsidersUPT} RON
+            </p>
+          </div>
+          <button onClick={openEditModal}>Editare Meniu</button>
         </div>
-      </div>
-      <div>
-        {isUserAdmin ? (
-          <div>
-            <img
-              src={`data:image/png;base64,${foodImage}`}
-              className="food-picture"
-              style={{
-                minWidth: "15rem",
-                minHeight: "10rem",
-                maxWidth: "15rem",
-                maxHeight: "10rem",
-                backgroundColor: "blue",
-                borderRadius: "5%",
-                backgroundImage: `url(${image})`,
-                backgroundSize: "cover",
-                cursor: "pointer",
-              }}
-              alt="NO_IMAGE_FOUND"
-              onClick={handleImageUpload}
-            />
-            <input
-              ref={fileInputRef}
-              type="file"
-              style={{ display: "none" }}
-              onChange={handleFileChange}
-            />
-            {/* Add the checkbox */}
-            <div className="checkbox-div">
+        <div>
+          {isUserAdmin ? (
+            <div>
+              <img
+                src={`data:image/png;base64,${foodImage}`}
+                className="food-picture"
+                style={{
+                  minWidth: "15rem",
+                  minHeight: "10rem",
+                  maxWidth: "15rem",
+                  maxHeight: "10rem",
+                  backgroundColor: "blue",
+                  borderRadius: "5%",
+                  backgroundImage: `url(${image})`,
+                  backgroundSize: "cover",
+                  cursor: "pointer",
+                }}
+                alt="NO_IMAGE_FOUND"
+                onClick={handleImageUpload}
+              />
               <input
-                key={uuidv4()}
-                type="checkbox"
-                checked={isChecked}
-                onChange={handleCheckboxChange}
-                style={{ width: "20px", height: "20px" }}
+                ref={fileInputRef}
+                type="file"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+              <div className="checkbox-div">
+                <input
+                  key={uuidv4()}
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={handleCheckboxChange}
+                  style={{ width: "20px", height: "20px" }}
+                />
+              </div>
+            </div>
+          ) : (
+            <div>
+              <img
+                src={`data:image/png;base64,${foodImage}`}
+                className="food-picture"
+                style={{
+                  minWidth: "15rem",
+                  minHeight: "10rem",
+                  maxWidth: "15rem",
+                  maxHeight: "10rem",
+                  backgroundColor: "blue",
+                  borderRadius: "5%",
+                  backgroundImage: `url(${image})`,
+                  backgroundSize: "cover",
+                }}
+                alt="NO_IMAGE_FOUND"
               />
             </div>
-          </div>
-        ) : (
-          <div>
-            <img
-              src={`data:image/png;base64,${foodImage}`}
-              className="food-picture"
-              style={{
-                minWidth: "15rem",
-                minHeight: "10rem",
-                maxWidth: "15rem",
-                maxHeight: "10rem",
-                backgroundColor: "blue",
-                borderRadius: "5%",
-                backgroundImage: `url(${image})`,
-                backgroundSize: "cover",
-              }}
-              alt="NO_IMAGE_FOUND"
-            />
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+      {isEditModalOpen && (
+        <EditCardModal
+          cardPrimaryKey={cardPrimaryKey}
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+          cardData={{
+            title,
+            description,
+            priceForUPT,
+            priceOutsidersUPT,
+            cardPrimaryKey,
+            isUserUPT,
+            foodImage,
+          }}
+          useAddModal={true}
+          menuType={menuType}
+        />
+      )}
+    </>
   );
 };
