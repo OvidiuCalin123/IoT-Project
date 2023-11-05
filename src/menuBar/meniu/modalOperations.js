@@ -141,14 +141,12 @@ const Modal = ({
                 </div>
               </div>
             </div>
-            <div className="chose-photo-modal">
+            <label className="add-photo-text">
               <img
                 src={image ?? uploadPhoto}
                 alt="poza Cantina"
                 className="add-photo"
               />
-            </div>
-            <label className="add-photo-text">
               <input type="file" onChange={handleFileChange} />
               Adaugă o imagine
             </label>
