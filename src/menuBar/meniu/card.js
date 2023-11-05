@@ -115,7 +115,6 @@ export const Card = ({
               {priceOutsidersUPT} RON
             </p>
           </div>
-          <button onClick={openEditModal}>Editare Meniu</button>
         </div>
         <div>
           {isUserAdmin ? (
@@ -150,8 +149,9 @@ export const Card = ({
                   checked={isChecked}
                   onChange={handleCheckboxChange}
                   style={{ width: "20px", height: "20px" }}
-                />
-              </div>
+                />{" "}
+              </div>{" "}
+              <button onClick={openEditModal}>Editare Meniu</button>
             </div>
           ) : (
             <div>
