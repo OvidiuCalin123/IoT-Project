@@ -11,7 +11,6 @@ import { Orar } from "./menuBar/orar";
 import { WelcomeBody } from "./welcome/welcomeBody";
 import { Contact } from "./menuBar/contact";
 import { Meniu } from "./menuBar/meniu/meniu";
-import { RegisterForm } from "./register/register";
 import { RegisterIndex } from "./register/registerIndex";
 function App() {
   return (

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./modalOperations.css";
 import { updateDailyMenuCard } from "./helperFunctions/apiRequest/putDailyMenu";
-import handleRefresh from "./modalOperations";
 
 const EditCardModal = ({
   cardPrimaryKey,
