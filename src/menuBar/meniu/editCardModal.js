@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./modalOperations.css";
 import { updateDailyMenuCard } from "./helperFunctions/apiRequest/putDailyMenu";
+import handleRefresh from "./modalOperations";
 
 const EditCardModal = ({
   cardPrimaryKey,
@@ -28,6 +29,10 @@ const EditCardModal = ({
       });
     } else if (menuType === "standard") {
     }
+  };
+
+  const handleRefresh = () => {
+    window.location.reload();
   };
 
   const handleTitleChange = (e) => {
@@ -72,15 +77,17 @@ const EditCardModal = ({
                 </div>
                 <div className="description-modal">
                   <label className="description-modal-text">Descriere:</label>
-                  <input
+                  <textarea
                     className="description-modal-content"
-                    type="text"
                     id="descriere"
                     name="descriere"
                     value={insertCardData.description}
                     onChange={handleDescriptionChange}
+                    cols="40"
+                    rows="5"
                   />
                 </div>
+
                 <div className="price-upt-modal"></div>
               </div>
               <div className="column-right-modal">
@@ -112,7 +119,14 @@ const EditCardModal = ({
             </div>
 
             <div className="save-modal">
-              <button className="save-modal-button" onClick={onEditCardSave}>
+              <button
+                className="save-modal-button"
+                onClick={() => {
+                  onEditCardSave();
+                  closeModal();
+                  handleRefresh();
+                }}
+              >
                 Salvare
               </button>
             </div>

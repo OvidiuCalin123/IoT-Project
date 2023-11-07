@@ -119,6 +119,23 @@ export const Card = ({
         <div>
           {isUserAdmin ? (
             <div>
+              <div className="checkbox-div">
+                <button className="edit-menu-button" onClick={openEditModal}>
+                  Editare Meniu
+                </button>
+                <input
+                  key={uuidv4()}
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={handleCheckboxChange}
+                  style={{
+                    width: "1.85rem",
+                    height: "1.85rem",
+                    border: "2px solid black",
+                    cursor: "pointer",
+                  }}
+                />{" "}
+              </div>{" "}
               <img
                 src={`data:image/png;base64,${foodImage}`}
                 className="food-picture"
@@ -142,16 +159,6 @@ export const Card = ({
                 style={{ display: "none" }}
                 onChange={handleFileChange}
               />
-              <div className="checkbox-div">
-                <input
-                  key={uuidv4()}
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={handleCheckboxChange}
-                  style={{ width: "20px", height: "20px" }}
-                />{" "}
-              </div>{" "}
-              <button onClick={openEditModal}>Editare Meniu</button>
             </div>
           ) : (
             <div>

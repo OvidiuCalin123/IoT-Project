@@ -104,7 +104,6 @@
   font-weight: bold;
   color: black;
 }
-/* Add this CSS to your stylesheet or style module */
 
 .modal {
   z-index: 9999 !important;
@@ -158,5 +157,11 @@
 .checkbox-div {
   display: flex;
   justify-content: flex-end;
-  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.edit-menu-button {
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem;
 }

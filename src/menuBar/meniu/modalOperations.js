@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./modalOperations.css";
 import uploadPhoto from "./upload-image.png";
 import { insertDailyMenuCard } from "./helperFunctions/apiRequest/insertDailyMenuCard";
+import { insertStandardMenuCard } from "./helperFunctions/apiRequest/insertStandardMenuCard";
 
 const Modal = ({
   isModalOpen,
@@ -22,6 +23,10 @@ const Modal = ({
     image: null,
   });
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   const onInsertNewCardSave = async () => {
     console.log(insertCardData);
 
@@ -29,6 +34,8 @@ const Modal = ({
       const token = localStorage.getItem("accessToken");
       await insertDailyMenuCard(token, insertCardData);
     } else if (menuType === "meniulStandard") {
+      const token = localStorage.getItem("accessToken");
+      await insertStandardMenuCard(token, insertCardData);
     }
   };
 
@@ -44,7 +51,7 @@ const Modal = ({
     setInsertCardData({
       title: insertCardData.title,
       description: insertCardData.description,
-      priceOutsidersUPT: insertCardData.priceOutsidersUPT,
+      priceOutsidersUPT: Math.round(event.target.value * 1.2),
       image: insertCardData.image,
       priceForUPT: event.target.value * 1.0,
     });
@@ -54,7 +61,7 @@ const Modal = ({
       description: insertCardData.description,
       image: insertCardData.image,
       priceForUPT: event.target.value * 1.0,
-      priceOutsidersUPT: event.target.value * 1.2,
+      priceOutsidersUPT: Math.round(event.target.value * 1.2),
     });
     const inputValue = event.target.value;
     const regex = /^\d+(\.\d{0,2})?$/;
@@ -105,12 +112,14 @@ const Modal = ({
                 </div>
                 <div className="description-modal">
                   <label className="description-modal-text">Descriere:</label>
-                  <input
+                  <textarea
                     className="description-modal-content"
-                    type="text"
                     id="descriere"
                     name="descriere"
+                    value={insertCardData.description}
                     onChange={handleDescriptionChange}
+                    cols="40"
+                    rows="5"
                   />
                 </div>
                 <div className="price-upt-modal"></div>
@@ -147,13 +156,21 @@ const Modal = ({
                 alt="poza Cantina"
                 className="add-photo"
               />
-              <input type="file" onChange={handleFileChange} />
-              Adaugă o imagine
+              <input
+                type="file"
+                className="hidden-button"
+                onChange={handleFileChange}
+              />
+              <div className="add-photo-text-pointer">Adaugă o imagine</div>
             </label>
             <div className="save-modal">
               <button
                 className="save-modal-button"
-                onClick={onInsertNewCardSave}
+                onClick={() => {
+                  onInsertNewCardSave();
+                  closeModal();
+                  handleRefresh();
+                }}
               >
                 Salvare
               </button>
