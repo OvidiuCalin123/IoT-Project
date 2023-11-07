@@ -91,7 +91,7 @@ export const Card = ({
   return (
     <>
       <div className="card">
-        <div style={{ maxWidth: "20rem", paddingRight: "1rem" }}>
+        <div style={{ width: "100%", maxWidth: "20rem", paddingRight: "1rem" }}>
           <h2>{title}</h2>
           <p className="description">{description}</p>
           <div className="price-in-card">
