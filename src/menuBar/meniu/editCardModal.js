@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./modalOperations.css";
 import { updateDailyMenuCard } from "./helperFunctions/apiRequest/putDailyMenu";
+import { updateStandardMenuItem } from "./helperFunctions/apiRequest/putStandardMenu";
 
 const EditCardModal = ({
   cardPrimaryKey,
@@ -23,10 +24,17 @@ const EditCardModal = ({
       await updateDailyMenuCard(token, cardPrimaryKey, {
         title: insertCardData.title,
         description: insertCardData.description,
-        priceForUPT: insertCardData.priceForUPT,
+        priceForUPT: insertCardData.priceForUPT * 1.0,
         priceOutsidersUPT: (insertCardData.priceForUPT * 1.2).toFixed(2),
       });
     } else if (menuType === "standard") {
+      const token = localStorage.getItem("accessToken");
+      await updateStandardMenuItem(token, cardPrimaryKey, {
+        title: insertCardData.title,
+        description: insertCardData.description,
+        priceForUPT: insertCardData.priceForUPT * 1.0,
+        priceOutsidersUPT: (insertCardData.priceForUPT * 1.2).toFixed(2),
+      });
     }
   };
 

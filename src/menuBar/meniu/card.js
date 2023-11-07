@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./meniuStyles.css";
 import { updateDailyMenuItemPicture } from "./helperFunctions/apiRequest/putDailyMenuPicture";
-import { updateStandardMenuItemPicture } from "./helperFunctions/apiRequest/putStandardMenu";
+import { updateStandardMenuItemPicture } from "./helperFunctions/apiRequest/putStandardMenuPicture";
 import { v4 as uuidv4 } from "uuid";
 import EditCardModal from "./editCardModal";
 
@@ -23,6 +23,10 @@ export const Card = ({
   const [isChecked, setIsChecked] = useState(false);
 
   const fileInputRef = useRef();
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
 
   const handleImageUpload = async () => {
     fileInputRef.current.click();
@@ -52,6 +56,7 @@ export const Card = ({
             picture,
           });
         }
+        handleRefresh();
         const imageUrl = URL.createObjectURL(picture);
         setImage(imageUrl);
       } catch (error) {

@@ -51,7 +51,7 @@ const Modal = ({
     setInsertCardData({
       title: insertCardData.title,
       description: insertCardData.description,
-      priceOutsidersUPT: Math.round(event.target.value * 1.2),
+      priceOutsidersUPT: Math.round(event.target.value * 1.2).toFixed(2),
       image: insertCardData.image,
       priceForUPT: event.target.value * 1.0,
     });
@@ -61,7 +61,7 @@ const Modal = ({
       description: insertCardData.description,
       image: insertCardData.image,
       priceForUPT: event.target.value * 1.0,
-      priceOutsidersUPT: Math.round(event.target.value * 1.2),
+      priceOutsidersUPT: Math.round(event.target.value * 1.2).toFixed(2),
     });
     const inputValue = event.target.value;
     const regex = /^\d+(\.\d{0,2})?$/;
