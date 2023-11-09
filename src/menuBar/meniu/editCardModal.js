@@ -131,7 +131,7 @@ const EditCardModal = ({
                 onClick={() => {
                   onEditCardSave();
                   closeModal();
-                  handleRefresh();
+                  // handleRefresh();
                 }}
               >
                 Salvare

@@ -30,6 +30,7 @@ export const insertDailyMenuCard = (
     })
     .then((updatedData) => {
       console.log("Menu item updated:", updatedData);
+      window.location.reload();
       return updatedData;
     })
     .catch((error) => {
