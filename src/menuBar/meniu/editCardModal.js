@@ -122,7 +122,7 @@ const EditCardModal = ({
                     type="text"
                     id="pretOutsiders"
                     name="pretOutsiders"
-                    value={insertCardData.priceForUPT * 1.2}
+                    value={(insertCardData.priceForUPT * 1.2).toFixed(2)}
                     readOnly
                   />
                 </div>
