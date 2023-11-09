@@ -110,7 +110,6 @@ const EditCardModal = ({
                     name="pretUPT"
                     value={insertCardData.priceForUPT}
                     onChange={handleUptPriceChange}
-                    pattern="[0-9]*\.[0-9]{2}"
                   />
                 </div>
                 <div className="price-outsiders-upt-modal">
