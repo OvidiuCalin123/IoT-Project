@@ -51,11 +51,14 @@ const EditCardModal = ({
 
   const handleUptPriceChange = (event) => {
     const inputValue = event.target.value;
-    console.log(event.target.value);
-    setInsertCardData({
-      ...insertCardData,
-      priceForUPT: inputValue,
-    });
+
+    const regex = /^\d*(\.\d{0,2})?$/;
+    if (inputValue === "" || regex.test(inputValue)) {
+      setInsertCardData({
+        ...insertCardData,
+        priceForUPT: inputValue,
+      });
+    }
   };
 
   return (
@@ -119,7 +122,7 @@ const EditCardModal = ({
                     type="text"
                     id="pretOutsiders"
                     name="pretOutsiders"
-                    value={(insertCardData.priceForUPT * 1.2).toFixed(2)}
+                    value={insertCardData.priceForUPT * 1.2}
                     readOnly
                   />
                 </div>
