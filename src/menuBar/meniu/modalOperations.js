@@ -3,6 +3,7 @@ import "./modalOperations.css";
 import uploadPhoto from "./upload-image.png";
 import { insertDailyMenuCard } from "./helperFunctions/apiRequest/insertDailyMenuCard";
 import { insertStandardMenuCard } from "./helperFunctions/apiRequest/insertStandardMenuCard";
+import no_image_avaliable from "./no_image_avaliable.jpg";
 
 const Modal = ({
   isModalOpen,
@@ -31,7 +32,6 @@ const Modal = ({
     console.log(insertCardData);
 
     if (menuType === "meniulZilei") {
-      console.log("ORICEORICE");
       const token = localStorage.getItem("accessToken");
       await insertDailyMenuCard(token, insertCardData);
     } else if (menuType === "meniulStandard") {
@@ -171,6 +171,13 @@ const Modal = ({
                   onInsertNewCardSave();
                   closeModal();
                 }}
+                disabled={
+                  insertCardData.title === "" ||
+                  insertCardData.description === "" ||
+                  insertCardData.priceForUPT === 0.0 ||
+                  insertCardData.priceOutsidersUPT === 0.0 ||
+                  insertCardData.image === null
+                }
               >
                 Salvare
               </button>

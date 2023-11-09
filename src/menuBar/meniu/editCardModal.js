@@ -18,7 +18,6 @@ const EditCardModal = ({
   });
 
   const onEditCardSave = async () => {
-    console.log(cardData);
     if (menuType === "daily") {
       const token = localStorage.getItem("accessToken");
       await updateDailyMenuCard(token, cardPrimaryKey, {
@@ -52,9 +51,10 @@ const EditCardModal = ({
 
   const handleUptPriceChange = (event) => {
     const inputValue = event.target.value;
+    console.log(event.target.value);
     setInsertCardData({
       ...insertCardData,
-      priceForUPT: parseFloat(inputValue),
+      priceForUPT: inputValue,
     });
   };
 
@@ -107,6 +107,7 @@ const EditCardModal = ({
                     name="pretUPT"
                     value={insertCardData.priceForUPT}
                     onChange={handleUptPriceChange}
+                    pattern="[0-9]*\.[0-9]{2}"
                   />
                 </div>
                 <div className="price-outsiders-upt-modal">
@@ -133,6 +134,12 @@ const EditCardModal = ({
                   closeModal();
                   // handleRefresh();
                 }}
+                disabled={
+                  insertCardData.title === "" ||
+                  insertCardData.description === "" ||
+                  insertCardData.priceForUPT === 0.0 ||
+                  insertCardData.priceOutsidersUPT === 0.0
+                }
               >
                 Salvare
               </button>
