@@ -54,14 +54,14 @@ const Modal = ({
       description: insertCardData.description,
       priceOutsidersUPT: (event.target.value * 1.2).toFixed(2),
       image: insertCardData.image,
-      priceForUPT: event.target.value * 1.0,
+      priceForUPT: (event.target.value * 1.0).toFixed(2),
     });
 
     setInsertCardData({
       title: insertCardData.title,
       description: insertCardData.description,
       image: insertCardData.image,
-      priceForUPT: event.target.value * 1.0,
+      priceForUPT: (event.target.value * 1.0).toFixed(2),
       priceOutsidersUPT: (event.target.value * 1.2).toFixed(2),
     });
     const inputValue = event.target.value;
