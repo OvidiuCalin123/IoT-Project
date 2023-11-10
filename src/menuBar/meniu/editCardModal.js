@@ -23,7 +23,7 @@ const EditCardModal = ({
       await updateDailyMenuCard(token, cardPrimaryKey, {
         title: insertCardData.title,
         description: insertCardData.description,
-        priceForUPT: insertCardData.priceForUPT * 1.0,
+        priceForUPT: (insertCardData.priceForUPT * 1.0).toFixed(2),
         priceOutsidersUPT: (insertCardData.priceForUPT * 1.2).toFixed(2),
       });
     } else if (menuType === "standard") {
@@ -31,7 +31,7 @@ const EditCardModal = ({
       await updateStandardMenuItem(token, cardPrimaryKey, {
         title: insertCardData.title,
         description: insertCardData.description,
-        priceForUPT: insertCardData.priceForUPT * 1.0,
+        priceForUPT: (insertCardData.priceForUPT * 1.0).toFixed(2),
         priceOutsidersUPT: (insertCardData.priceForUPT * 1.2).toFixed(2),
       });
     }
@@ -54,9 +54,13 @@ const EditCardModal = ({
 
     const regex = /^\d*(\.\d{0,2})?$/;
     if (inputValue === "" || regex.test(inputValue)) {
+      const newUptPrice = inputValue;
+      const newNonUptPrice = (parseFloat(newUptPrice) * 1.2).toFixed(2);
+
       setInsertCardData({
         ...insertCardData,
-        priceForUPT: inputValue,
+        priceForUPT: newUptPrice,
+        priceOutsidersUPT: newNonUptPrice,
       });
     }
   };
@@ -134,7 +138,6 @@ const EditCardModal = ({
                 onClick={() => {
                   onEditCardSave();
                   closeModal();
-                  // handleRefresh();
                 }}
                 disabled={
                   insertCardData.title === "" ||
