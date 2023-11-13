@@ -23,6 +23,7 @@ export const deleteStandardMenuItems = (token, selectedStandardCardsPK) => {
     })
     .then((data) => {
       console.log(data);
+      window.location.reload();
     })
     .catch((error) => {
       console.error("Fetch error:", error.message);
