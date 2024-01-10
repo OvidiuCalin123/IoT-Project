@@ -10,11 +10,13 @@ const EditCardModal = ({
   closeModal,
   menuType,
   cardData,
+  updateFlagRefresh,
 }) => {
   const [insertCardData, setInsertCardData] = useState({
     title: cardData.title,
     description: cardData.description,
     priceForUPT: cardData.priceForUPT,
+    portions: cardData.portions,
   });
 
   const onEditCardSave = async () => {
@@ -25,6 +27,7 @@ const EditCardModal = ({
         description: insertCardData.description,
         priceForUPT: (insertCardData.priceForUPT * 1.0).toFixed(2),
         priceOutsidersUPT: (insertCardData.priceForUPT * 1.2).toFixed(2),
+        portions: insertCardData.portions,
       });
     } else if (menuType === "standard") {
       const token = localStorage.getItem("accessToken");
@@ -33,8 +36,10 @@ const EditCardModal = ({
         description: insertCardData.description,
         priceForUPT: (insertCardData.priceForUPT * 1.0).toFixed(2),
         priceOutsidersUPT: (insertCardData.priceForUPT * 1.2).toFixed(2),
+        portions: insertCardData.portions,
       });
     }
+    updateFlagRefresh(true);
   };
 
   const handleRefresh = () => {
@@ -61,6 +66,18 @@ const EditCardModal = ({
         ...insertCardData,
         priceForUPT: newUptPrice,
         priceOutsidersUPT: newNonUptPrice,
+      });
+    }
+  };
+
+  const handlePortionsChange = (event) => {
+    const inputValue = event.target.value;
+    const regex = /^\d+$/;
+
+    if (inputValue === "" || regex.test(inputValue)) {
+      setInsertCardData({
+        ...insertCardData,
+        portions: event.target.value,
       });
     }
   };
@@ -129,6 +146,19 @@ const EditCardModal = ({
                     readOnly
                   />
                 </div>
+                <div className="portions">
+                  <label className="price-outsiders-modal-text">
+                    Porții disponibile:
+                  </label>
+                  <input
+                    className="portions-content"
+                    type="text"
+                    id="portions"
+                    name="portions"
+                    value={insertCardData.portions}
+                    onChange={handlePortionsChange}
+                  />
+                </div>
               </div>
             </div>
 
@@ -143,7 +173,8 @@ const EditCardModal = ({
                   insertCardData.title === "" ||
                   insertCardData.description === "" ||
                   insertCardData.priceForUPT === 0.0 ||
-                  insertCardData.priceOutsidersUPT === 0.0
+                  insertCardData.priceOutsidersUPT === 0.0 ||
+                  insertCardData.portions === 0
                 }
               >
                 Salvare

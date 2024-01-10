@@ -11,16 +11,30 @@ const Modal = ({
   useDeleteModal,
   closeModal,
   menuType,
+  setUpdateFlag,
 }) => {
   const [uptPrice, setUptPrice] = useState("");
   const [nonUptPrice, setNonUptPrice] = useState("");
   const [image, setImage] = useState(null);
+
+  const handlePortionChange = (e) => {
+    const inputValue = e.target.value;
+    const regex = /^\d+$/;
+
+    if (inputValue === "" || regex.test(inputValue)) {
+      setInsertCardData({
+        ...insertCardData,
+        portions: e.target.value,
+      });
+    }
+  };
 
   const [insertCardData, setInsertCardData] = useState({
     title: "",
     description: "",
     priceForUPT: 0.0,
     priceOutsidersUPT: 0.0,
+    portions: 0,
     image: null,
   });
 
@@ -29,8 +43,6 @@ const Modal = ({
   };
 
   const onInsertNewCardSave = async () => {
-    console.log(insertCardData);
-
     if (menuType === "meniulZilei") {
       const token = localStorage.getItem("accessToken");
       await insertDailyMenuCard(token, insertCardData);
@@ -38,6 +50,7 @@ const Modal = ({
       const token = localStorage.getItem("accessToken");
       await insertStandardMenuCard(token, insertCardData);
     }
+    setUpdateFlag(true);
   };
 
   const handleTitleChange = (e) => {
@@ -55,6 +68,7 @@ const Modal = ({
       priceOutsidersUPT: (event.target.value * 1.2).toFixed(2),
       image: insertCardData.image,
       priceForUPT: (event.target.value * 1.0).toFixed(2),
+      portions: insertCardData.portions,
     });
 
     setInsertCardData({
@@ -63,6 +77,7 @@ const Modal = ({
       image: insertCardData.image,
       priceForUPT: (event.target.value * 1.0).toFixed(2),
       priceOutsidersUPT: (event.target.value * 1.2).toFixed(2),
+      portions: insertCardData.portions,
     });
     const inputValue = event.target.value;
     const regex = /^\d+(\.\d{0,2})?$/;
@@ -149,6 +164,19 @@ const Modal = ({
                     value={nonUptPrice}
                   />
                 </div>
+                <div className="portions">
+                  <label className="price-outsiders-modal-text">
+                    Porții disponibile:
+                  </label>
+                  <input
+                    className="portions-content"
+                    type="text"
+                    id="portions"
+                    name="portions"
+                    value={insertCardData.portions}
+                    onChange={handlePortionChange}
+                  />
+                </div>
               </div>
             </div>
             <label className="add-photo-text">
@@ -176,7 +204,8 @@ const Modal = ({
                   insertCardData.description === "" ||
                   insertCardData.priceForUPT === 0.0 ||
                   insertCardData.priceOutsidersUPT === 0.0 ||
-                  insertCardData.image === null
+                  insertCardData.image === null ||
+                  insertCardData.image === 0
                 }
               >
                 Salvare

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { showMenuCards } from "./helperFunctions/showMenuCards/showMenuCards";
+import { ShowMenuCards } from "./helperFunctions/showMenuCards/showMenuCards";
 import { getDailyMenu } from "./helperFunctions/apiRequest/getDailyMenu";
 import { getStandardMenu } from "./helperFunctions/apiRequest/getStandardMenu";
 import { setMaxHeight } from "./helperFunctions/getScreenMaxHeight";
@@ -7,10 +7,9 @@ import Modal from "./modalOperations";
 import { getIsAdmin } from "./helperFunctions/apiRequest/getIsAdmin";
 import { deleteDailyMenuItems } from "./helperFunctions/apiRequest/deleteDailyMenuItems";
 import { deleteStandardMenuItems } from "./helperFunctions/apiRequest/deleteStandardMenuItems";
-
-let isUPT = null;
-let selectedCardsPK = [];
-let selectedStandardCardsPK = [];
+import { postOrderDailyFood } from "./helperFunctions/apiRequest/postOrderDailyFood";
+import { postOrderStandardFood } from "./helperFunctions/apiRequest/postOrderStandardFood";
+import { OrderConfirmation } from "./toast";
 
 export const Meniu = () => {
   const [menuDataDaily, setMenuDataDaily] = useState([]);
@@ -20,11 +19,19 @@ export const Meniu = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [useAddModal, setAddModal] = useState(false);
   const [useDeleteModal, setDeleteModal] = useState(false);
-  const [isUserAdmin, setIsUserAdmin] = useState();
+  const [isUserAdmin, setIsUserAdmin] = useState(false);
   const [updateFlag, setUpdateFlag] = useState(false);
+  const [handleOrderRefresh, setHandleOrderRefresh] = useState(false);
+  const [selectedCardsPK, setSelectedCardsPK] = useState([]);
+  const [selectedStandardCardsPK, setSelectedStandardCardsPK] = useState([]);
+  const [isUPT, setIsUPT] = useState(null);
+  const [orderedFoodButtonPressed, setOrderedFoodButtonPressed] =
+    useState(false);
+  const [showOrderConfirmationModal, setShowOrderConfirmationModel] =
+    useState(false);
+
   const handleDelete = () => {
     const token = localStorage.getItem("accessToken");
-    console.log(selectedCardsPK, selectedStandardCardsPK);
 
     if (showVisualMenuSelected === "meniulZilei") {
       deleteDailyMenuItems(token, selectedCardsPK);
@@ -32,7 +39,32 @@ export const Meniu = () => {
       deleteStandardMenuItems(token, selectedStandardCardsPK);
     }
 
-    setUpdateFlag(!updateFlag);
+    setUpdateFlag(true);
+  };
+
+  const handleOrder = () => {
+    const token = localStorage.getItem("accessToken");
+    if (showVisualMenuSelected === "meniulZilei") {
+      setSelectedStandardCardsPK([]);
+      postOrderDailyFood(
+        token,
+        selectedCardsPK,
+        setUpdateFlag,
+        setOrderedFoodButtonPressed,
+        setShowOrderConfirmationModel
+      );
+      setSelectedCardsPK([]);
+    } else if (showVisualMenuSelected === "meniulStandard") {
+      setSelectedCardsPK([]);
+      postOrderStandardFood(
+        token,
+        selectedStandardCardsPK,
+        setUpdateFlag,
+        setOrderedFoodButtonPressed,
+        setShowOrderConfirmationModel
+      );
+      setSelectedStandardCardsPK([]);
+    }
   };
 
   const setSelectedCardsPrimaryKey = ({
@@ -42,30 +74,27 @@ export const Meniu = () => {
   }) => {
     if (isCheckBoxSelected === true) {
       if (menuType === "daily") {
-        selectedCardsPK.push(cardPrimaryKey);
+        setSelectedCardsPK((prev) => [...prev, cardPrimaryKey]);
       } else {
-        selectedStandardCardsPK.push(cardPrimaryKey);
+        setSelectedStandardCardsPK((prev) => [...prev, cardPrimaryKey]);
       }
     } else {
       if (menuType === "daily") {
-        const index = selectedCardsPK.indexOf(cardPrimaryKey);
-        if (index !== -1) {
-          selectedCardsPK.splice(index, 1);
-        }
+        setSelectedCardsPK((prev) =>
+          prev.filter((id) => id !== cardPrimaryKey)
+        );
       } else {
-        const index = selectedStandardCardsPK.indexOf(cardPrimaryKey);
-        if (index !== -1) {
-          selectedStandardCardsPK.splice(index, 1);
-        }
+        setSelectedStandardCardsPK((prev) =>
+          prev.filter((id) => id !== cardPrimaryKey)
+        );
       }
     }
-    console.log(selectedCardsPK);
   };
 
   const menuDataRef = useRef(null);
 
   const getIsUPT = (isUserUPT) => {
-    isUPT = isUserUPT;
+    setIsUPT(isUserUPT);
   };
 
   const getIsUserAdmin = (isUserAdmin) => {
@@ -78,7 +107,8 @@ export const Meniu = () => {
     getDailyMenu(token, setMenuDataDaily, getIsUPT);
     getStandardMenu(token, setMenuDataStandard);
     setMaxHeight(menuDataRef);
-  }, [updateFlag]);
+    setUpdateFlag(false);
+  }, [updateFlag, handleOrderRefresh]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -107,6 +137,7 @@ export const Meniu = () => {
   return (
     <div className="menu-layout">
       <div className="parent">
+        {<OrderConfirmation />}
         <div>
           <a
             className={
@@ -129,7 +160,7 @@ export const Meniu = () => {
             Meniul standard
           </a>
         </div>
-        {isUserAdmin && (
+        {isUserAdmin ? (
           <div className="add-delete">
             <button
               className="add"
@@ -149,19 +180,40 @@ export const Meniu = () => {
               Șterge
             </button>
           </div>
-        )}
+        ) : isUPT ? (
+          <button
+            style={{
+              backgroundColor: "rgb(10, 236, 175)",
+              fontWeight: "bold",
+              borderRadius: "10%",
+              borderColor: "transparent",
+              padding: "0.5rem",
+              marginTop: "0.5rem",
+            }}
+            onClick={() => {
+              handleOrder();
+            }}
+          >
+            Rezervă!
+          </button>
+        ) : (
+          <div></div>
+        )}{" "}
+        {handleOrderRefresh}
       </div>
+      {handleOrderRefresh}
       <div className="menu-data" ref={menuDataRef}>
-        {showMenuCards(
-          showVisualMenuSelected,
-          menuDataDaily,
-          menuDataStandard,
-          isUPT,
-          isUserAdmin,
-          setSelectedCardsPrimaryKey
-        )}
+        <ShowMenuCards
+          showVisualMenuSelected={showVisualMenuSelected}
+          menuDataDaily={menuDataDaily}
+          menuDataStandard={menuDataStandard}
+          isUPT={isUPT}
+          isUserAdmin={isUserAdmin}
+          setSelectedCardsPrimaryKey={setSelectedCardsPrimaryKey}
+          updateFlagRefresh={setUpdateFlag}
+          orderedFoodButtonPressed={orderedFoodButtonPressed}
+        />
       </div>
-      {/* Use the Modal component here */}
       <Modal
         isModalOpen={isModalOpen}
         useAddModal={useAddModal}
@@ -169,6 +221,7 @@ export const Meniu = () => {
         closeModal={closeModal}
         handleSaveClick={handleSaveClick}
         menuType={showVisualMenuSelected}
+        setUpdateFlag={setUpdateFlag}
       />
     </div>
   );

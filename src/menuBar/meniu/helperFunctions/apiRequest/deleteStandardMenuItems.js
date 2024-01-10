@@ -21,10 +21,7 @@ export const deleteStandardMenuItems = (token, selectedStandardCardsPK) => {
         throw new Error(`Unexpected status code: ${response.status}`);
       }
     })
-    .then((data) => {
-      console.log(data);
-      window.location.reload();
-    })
+    .then((data) => {})
     .catch((error) => {
       console.error("Fetch error:", error.message);
     });

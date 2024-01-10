@@ -96,6 +96,20 @@
   border-color: black;
 }
 
+.portions-content {
+  height: 40%;
+  width: 97.5%;
+  border-color: black;
+}
+
+.price-outsiders-modal-text {
+  text-decoration: underline;
+  font-weight: bold;
+  color: #212529;
+  font-size: 150%;
+  padding-bottom: 0.5rem;
+}
+
 .save-modal-button {
   background-color: rgb(10, 236, 175);
   width: 4.25rem;

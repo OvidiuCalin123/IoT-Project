@@ -7,6 +7,7 @@ import EditCardModal from "./editCardModal";
 
 export const Card = ({
   title,
+  portions,
   description,
   priceForUPT,
   priceOutsidersUPT,
@@ -17,6 +18,8 @@ export const Card = ({
   isUserAdmin,
   selectedCardsPrimaryKey,
   setSelectedCardsPrimaryKey,
+  updateFlagRefresh,
+  orderedFoodButtonPressed,
 }) => {
   const token = localStorage.getItem("accessToken");
   const [image, setImage] = useState(null);
@@ -31,7 +34,6 @@ export const Card = ({
   const handleImageUpload = async () => {
     fileInputRef.current.click();
   };
-
   const handleFileChange = async (event) => {
     const picture = event.target.files[0];
 
@@ -45,6 +47,7 @@ export const Card = ({
             priceOutsidersUPT,
             isUserUPT,
             picture,
+            portions,
           });
         } else if (menuType === "standard") {
           await updateStandardMenuItemPicture(token, cardPrimaryKey, {
@@ -54,6 +57,7 @@ export const Card = ({
             priceOutsidersUPT,
             isUserUPT,
             picture,
+            portions,
           });
         }
         handleRefresh();
@@ -81,6 +85,9 @@ export const Card = ({
         menuType: menuType,
       });
     }
+    // if (orderedFoodButtonPressed === true) {
+    //   setIsChecked(false);
+    // }
   };
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -97,7 +104,33 @@ export const Card = ({
     <>
       <div className="card">
         <div style={{ width: "100%", maxWidth: "20rem", paddingRight: "1rem" }}>
-          <h2>{title}</h2>
+          <div className="portii">
+            <h2
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {title}
+            </h2>
+            <div
+              style={{
+                backgroundColor: "#f5f5f5",
+                marginLeft: "1rem",
+                borderStyle: "solid",
+                padding: "0.25rem",
+
+                paddingRight: "0.5rem",
+                paddingLeft: "0.5rem",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div style={{ fontWeight: "bold" }}>{portions} în stoc</div>
+            </div>
+          </div>
           <p className="description">{description}</p>
           <div className="price-in-card">
             <b>Preț: </b>
@@ -119,6 +152,25 @@ export const Card = ({
             >
               {priceOutsidersUPT} RON
             </p>
+
+            {!isUserAdmin && isUserUPT ? (
+              <div className="checkbox-div" style={{ marginLeft: "1rem" }}>
+                <input
+                  key={uuidv4()}
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={handleCheckboxChange}
+                  style={{
+                    width: "1.85rem",
+                    height: "1.85rem",
+                    border: "2px solid black",
+                    cursor: "pointer",
+                  }}
+                />
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
         <div>
@@ -179,8 +231,10 @@ export const Card = ({
                   borderRadius: "5%",
                   backgroundImage: `url(${image})`,
                   backgroundSize: "cover",
+                  cursor: "pointer",
                 }}
                 alt="NO_IMAGE_FOUND"
+                onClick={handleImageUpload}
               />
             </div>
           )}
@@ -199,9 +253,11 @@ export const Card = ({
             cardPrimaryKey,
             isUserUPT,
             foodImage,
+            portions,
           }}
           useAddModal={true}
           menuType={menuType}
+          updateFlagRefresh={updateFlagRefresh}
         />
       )}
     </>

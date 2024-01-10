@@ -1,7 +1,7 @@
 export const updateStandardMenuItemPicture = (
   token,
   id,
-  { title, description, priceForUPT, priceOutsidersUPT, picture }
+  { title, description, priceForUPT, priceOutsidersUPT, picture, portions }
 ) => {
   const apiUrl = `https://localhost:7239/api/StandardMenu/Picture/${id}`;
 
@@ -13,6 +13,7 @@ export const updateStandardMenuItemPicture = (
   formData.append("description", description);
   formData.append("priceForUPT", priceForUPT);
   formData.append("priceOutsidersUPT", priceOutsidersUPT);
+  formData.append("portions", portions);
 
   const handleRefresh = () => {
     window.location.reload();
@@ -35,7 +36,6 @@ export const updateStandardMenuItemPicture = (
       }
     })
     .then((updatedData) => {
-      console.log("Menu item updated:", updatedData);
       return updatedData;
     })
     .catch((error) => {

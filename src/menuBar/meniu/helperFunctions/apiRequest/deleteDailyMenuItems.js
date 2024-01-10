@@ -22,7 +22,6 @@ export const deleteDailyMenuItems = (token, selectedCardsPK) => {
       }
     })
     .then((data) => {
-      console.log(data);
       window.location.reload();
     })
     .catch((error) => {

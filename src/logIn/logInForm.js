@@ -35,7 +35,6 @@ export const LogInForm = () => {
         }
       })
       .then((data) => {
-        console.log(data);
         localStorage.setItem("accessToken", data.token);
         handleGoToWelcome();
       })

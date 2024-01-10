@@ -1,16 +1,17 @@
 export const insertStandardMenuCard = (
   token,
-  { title, description, priceForUPT, priceOutsidersUPT, image }
+  { title, description, priceForUPT, priceOutsidersUPT, image, portions }
 ) => {
   const apiUrl = `https://localhost:7239/api/StandardMenu`;
 
   const formData = new FormData();
-  console.log({ title, description, priceForUPT, priceOutsidersUPT, image });
+
   formData.append("image", image);
   formData.append("title", title);
   formData.append("description", description);
   formData.append("priceForUPT", priceForUPT);
   formData.append("priceOutsidersUPT", priceOutsidersUPT);
+  formData.append("portions", portions);
 
   return fetch(apiUrl, {
     method: "POST",
@@ -29,8 +30,6 @@ export const insertStandardMenuCard = (
       }
     })
     .then((updatedData) => {
-      console.log("Menu item updated:", updatedData);
-      window.location.reload();
       return updatedData;
     })
     .catch((error) => {

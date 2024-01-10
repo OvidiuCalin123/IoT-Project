@@ -18,7 +18,6 @@ export const getDailyMenu = (token, setMenuDataDaily, getIsUPT) => {
       }
     })
     .then((data) => {
-      console.log(data);
       getIsUPT(data.isUptDomain);
       setMenuDataDaily(data.dailyMenu);
     })

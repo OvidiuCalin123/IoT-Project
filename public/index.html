@@ -1,11 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CantinaUPT</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+      //  import { getDatabase } from "firebase/database";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBuhbrwtBhRTfRn5D7eAufFFABI0qNXFZA",
+        authDomain: "cantinaupt-4ef94.firebaseapp.com",
+        projectId: "cantinaupt-4ef94",
+        storageBucket: "cantinaupt-4ef94.appspot.com",
+        messagingSenderId: "214696399550",
+        appId: "1:214696399550:web:eb3321549ebc49b20444ef",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      //const database = getDatabase(app);
+      document.addEventListener("DOMContentLoaded", function () {
+        const loadEl = document.querySelector("#load");
+
+        try {
+          let features = ["auth", "database"].filter(
+            (feature) => typeof app[feature] === "function"
+          );
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent =
+            "Error loading the Firebase SDK, check the console.";
+        }
+      });
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Firebase Hosting Setup Complete</h1>
+      <p>
+        You're seeing this because you've successfully set up Firebase Hosting.
+        Now it's time to go build something extraordinary!
+      </p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/"
+        >Open Hosting Documentation</a
+      >
+    </div>
   </body>
 </html>

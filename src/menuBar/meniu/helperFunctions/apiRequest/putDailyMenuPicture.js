@@ -1,7 +1,7 @@
 export const updateDailyMenuItemPicture = (
   token,
   id,
-  { title, description, priceForUPT, priceOutsidersUPT, picture }
+  { title, description, priceForUPT, priceOutsidersUPT, picture, portions }
 ) => {
   const apiUrl = `https://localhost:7239/api/DailyMenu/Picture/${id}`;
 
@@ -13,6 +13,7 @@ export const updateDailyMenuItemPicture = (
   formData.append("description", description);
   formData.append("priceForUPT", priceForUPT);
   formData.append("priceOutsidersUPT", priceOutsidersUPT);
+  formData.append("portions", portions);
 
   return fetch(apiUrl, {
     method: "PUT",
@@ -31,7 +32,6 @@ export const updateDailyMenuItemPicture = (
       }
     })
     .then((updatedData) => {
-      console.log("Menu item updated:", updatedData);
       window.location.reload();
       return updatedData;
     })
