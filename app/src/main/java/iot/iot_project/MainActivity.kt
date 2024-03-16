@@ -3,6 +3,7 @@ package iot.iot_project
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -18,7 +19,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            IoT_projectTheme {
+            IoT_projectTheme(darkTheme = true) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -30,6 +31,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun LoginScreen() {
     var email by remember { mutableStateOf("") }
@@ -37,7 +39,7 @@ fun LoginScreen() {
     var emailError by remember { mutableStateOf(false) }
     var passwordError by remember { mutableStateOf(false) }
 
-    Column(
+        Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
@@ -58,7 +60,7 @@ fun LoginScreen() {
         if (emailError) {
             Text(
                 text = "Please enter a valid email",
-                color = Color.Yellow,
+                color = Color.Red,
                 modifier = Modifier.padding(start = 8.dp, top = 4.dp)
             )
         }
@@ -88,7 +90,8 @@ fun LoginScreen() {
 
         Button(
             onClick = { /* TODO: Perform login action */ },
-            modifier = Modifier.fillMaxWidth()
+            colors = ButtonDefaults.buttonColors(contentColor = Color.Black),
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text("Login", fontSize = 24.sp)
         }
