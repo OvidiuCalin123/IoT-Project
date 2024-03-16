@@ -58,7 +58,7 @@ fun LoginScreen() {
         if (emailError) {
             Text(
                 text = "Please enter a valid email",
-                color = Color.Red,
+                color = Color.Yellow,
                 modifier = Modifier.padding(start = 8.dp, top = 4.dp)
             )
         }
