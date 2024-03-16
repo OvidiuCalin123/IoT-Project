@@ -46,6 +46,13 @@ fun LoginScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Text(
+            text = "IoT Light",
+            style = MaterialTheme.typography.headlineLarge,
+            modifier = Modifier.padding(bottom = 100.dp)
+        )
+
         OutlinedTextField(
             value = email,
             onValueChange = {
