@@ -3,16 +3,24 @@ package iot.iot_project
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import iot.iot_project.ui.theme.IoT_projectTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +32,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginScreen()
+                    val navController = rememberNavController()
+                    NavHost(navController = navController, startDestination = "login") {
+                        composable("login") {
+                            LoginScreen(navController)
+                        }
+                        composable("mainPage") {
+                            MainScreen(navController)
+                        }
+                        composable("createAccount") {
+                            CreateAccountScreen(navController)
+
+                        }
+                    }
                 }
             }
         }
@@ -33,7 +53,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var emailError by remember { mutableStateOf(false) }
@@ -47,11 +67,11 @@ fun LoginScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Text(
-            text = "IoT Light",
-            style = MaterialTheme.typography.headlineLarge,
-            modifier = Modifier.padding(bottom = 100.dp)
-        )
+            Image(
+                painter = painterResource(id = R.drawable.bulbok),
+                contentDescription = "Your Image Description",
+                contentScale = ContentScale.FillWidth
+            )
 
         OutlinedTextField(
             value = email,
@@ -96,17 +116,17 @@ fun LoginScreen() {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = { /* TODO: Perform login action */ },
+            onClick = { navController.navigate("mainPage") },
             colors = ButtonDefaults.buttonColors(contentColor = Color.Black),
-            modifier = Modifier.fillMaxWidth(),
-        ) {
+            modifier = Modifier.fillMaxWidth()
+            ) {
             Text("Login", fontSize = 24.sp)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         TextButton(
-            onClick = { /* TODO: Navigate to create account screen */ },
+            onClick = {navController.navigate("createAccount")  },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Create an account")
@@ -118,10 +138,45 @@ fun isValidEmail(email: String): Boolean {
     return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 }
 
-@Preview(showBackground = true)
 @Composable
-fun LoginScreenPreview() {
-    IoT_projectTheme {
-        LoginScreen()
+fun MainScreen(navController: NavController) {
+    var isImageOn by remember { mutableStateOf(true) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Toggle the state when the image is clicked
+        Text(
+            text = if (isImageOn) "Press to turn light off" else "Press to turn light on",
+            modifier = Modifier.padding(25.dp),
+            fontSize = 27.5.sp
+        )
+        Image(
+            painter = painterResource(id = if (isImageOn) R.drawable.bulbon else R.drawable.bulboff),
+            contentDescription = "Your Image Description",
+            modifier = Modifier.clickable { isImageOn = !isImageOn }
+        )
+
+    }
+}
+
+@Composable
+fun CreateAccountScreen(navController: NavController) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Altceva",
+            fontSize = 24.sp,
+            color = Color.White
+        )
     }
 }
