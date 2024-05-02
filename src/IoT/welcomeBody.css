@@ -1,0 +1,88 @@
+.header-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-welcome-padding {
+  padding-bottom: 1rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  background-color: #2f2c2c;
+  padding: 0.5rem;
+}
+
+.left-nav-text {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 2.5rem;
+  padding-left: 0.5rem;
+}
+
+.right-nav-text {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 2.5rem;
+  padding-right: 0.5rem;
+  margin-left: auto;
+  cursor: pointer;
+  border-radius: 0.45rem;
+  padding: 0.5rem 1rem;
+}
+
+.right-nav-text:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.child {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 2.5rem;
+  border: 0.2rem solid #ffffff;
+  border-radius: 0.45rem;
+  background-color: transparent;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.child:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.logout-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.logout-modal-content button {
+  margin: 1rem;
+}

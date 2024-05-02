@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "cantinaupt-4ef94"
-  }
+    "default": "iot-project-ef186",
+    "eco_light": "iot-project-ef186"
+  },
+  "targets": {},
+  "etags": {}
 }

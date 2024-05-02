@@ -1,12 +1,13 @@
 import { initializeApp } from "firebase/app";
 function initApp() {
   const firebaseConfig = {
-    apiKey: "AIzaSyBuhbrwtBhRTfRn5D7eAufFFABI0qNXFZA",
-    authDomain: "cantinaupt-4ef94.firebaseapp.com",
-    projectId: "cantinaupt-4ef94",
-    storageBucket: "cantinaupt-4ef94.appspot.com",
-    messagingSenderId: "214696399550",
-    appId: "1:214696399550:web:eb3321549ebc49b20444ef",
+    apiKey: "AIzaSyDFVKNGe37kqOBl5QfY4OJAhCFlTcX2wIY",
+    authDomain: "iot-project-ef186.firebaseapp.com",
+    projectId: "iot-project-ef186",
+    storageBucket: "iot-project-ef186.appspot.com",
+    messagingSenderId: "981937076954",
+    appId: "1:981937076954:web:594361c9fe1a034e2943e3",
+    measurementId: "G-RE47RXE6NH",
   };
 
   return initializeApp(firebaseConfig);
